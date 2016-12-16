@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../style/App.css';
-import Catalog from './Catalog'
+import Profile from './Profile'
 
 const mockDevelopersData = [
   {
@@ -118,7 +118,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Catalog developers={mockDevelopersData} />
+        <Profile developers={mockDevelopersData} />
       </div>
     );
   }
