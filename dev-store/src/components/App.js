@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../style/App.css';
-import Checkout from './Checkout'
+import SearchBar from '../containers/SearchBar'
 
 const mockDevelopersData = [
   {
@@ -118,7 +118,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Checkout developers={mockDevelopersData} />
+        <SearchBar developers={mockDevelopersData} />
       </div>
     );
   }
