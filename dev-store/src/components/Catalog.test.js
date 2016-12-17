@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Catalog from './Catalog';
+import App from './App';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
+import reducers from '../reducers';
+
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 const mockDevelopersData = [
   {
@@ -44,5 +51,9 @@ const mockDevelopersData = [
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Catalog  developers={mockDevelopersData}/>, div);
+  ReactDOM.render(  <Provider store={createStoreWithMiddleware(reducers)}>
+      <App >
+        <Catalog  developers={mockDevelopersData}/>
+      </App>
+    </Provider>, div);
 });

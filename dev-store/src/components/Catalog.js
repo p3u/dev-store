@@ -4,7 +4,6 @@ import Card from './Card'
 
 class Catalog extends Component {
   render(){
-    console.log(this.props.developers)
 
     return (
       <section className="cf w-100 pa2-ns">

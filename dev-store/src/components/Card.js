@@ -6,7 +6,6 @@ function calculateDevPrice(devData) {
 
 export default function Card({devInfo}) {
   const devWage = calculateDevPrice(devInfo);
-  console.log(devInfo);
   return (
     <article className="dev-card mw5 br3 pb3 ph4 ma3 ba b--black-10 dib">
       <div className="tc">
@@ -27,7 +26,7 @@ export default function Card({devInfo}) {
           </div>
         </nav>
 
-        <img src={devInfo.avatarUrl} className="br-100 h3 w3 dib" title="Kitty staring at you" />
+        <img src={devInfo.avatarUrl} className="br-100 h3 w3 dib" title="Developer" alt="Developer" />
 
         <div className="dev-info">
           <h1 className="f4">{devInfo.name}</h1>

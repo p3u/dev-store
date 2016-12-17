@@ -21,7 +21,6 @@ export function fetchDevelopers(organization) {
 }
 
 export function setCurrentOrg(organization){
-  console.log(organization)
   return {
     type: SET_CURRENT_ORGANIZATION,
     payload: organization

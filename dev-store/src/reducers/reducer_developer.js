@@ -21,7 +21,6 @@ function cleanDevelopersData(response){
 export default function(state = [], action) {
     switch (action.type) {
     case FETCH_DEVELOPERS:
-      console.log(action.payload.data)
       return cleanDevelopersData(action.payload.data).concat(state);
     default:
       return state;
