@@ -2,6 +2,7 @@ export default function CatalogQuery(organization){
   const BaseQuery =
   `{"query": "query {
       organization(login: \\"${organization}\\") {
+        login
         members(first: 30) {
           totalCount
           edges {

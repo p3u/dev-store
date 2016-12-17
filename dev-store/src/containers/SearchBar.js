@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchDevelopers } from '../actions/index';
+import { fetchDevelopers, setCurrentOrg } from '../actions/index';
 
 class SearchBar extends Component {
 
@@ -20,8 +20,16 @@ class SearchBar extends Component {
   // Fetching devs
   onFormSubmit(e){
     e.preventDefault();
-    console.log(this)
-    this.props.fetchDevelopers(this.state.term);
+    const term = this.state.term;
+    const searchHistory = this.props.organization.searchHistory;
+
+    if( searchHistory.includes(term) ) {
+      this.props.setCurrentOrg(term);
+    }
+    else {
+      this.props.fetchDevelopers(term);
+    }
+
     this.setState({ term: '' });
   }
 
@@ -45,13 +53,14 @@ class SearchBar extends Component {
 function mapDispatchToProps(dispatch) {
   // Guarantees that fetchDevelopers will be dispatched to
   // the Middlewares and eventually reducers
-  return bindActionCreators({ fetchDevelopers }, dispatch)
+  return bindActionCreators({ fetchDevelopers, setCurrentOrg }, dispatch)
 }
 
-// null because we are not mapping state to pros
-export default connect(null, mapDispatchToProps)(SearchBar)
+function mapStateToProps( { organization } ) {
+  // ES6: same as return { developers: developers }
+  return { organization };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
 // With both these functions (connect + mapDispatchToProps)
-// we can call fetchWeather from our SearchBar
-
-
-// export default SearchBar;
+// we can call fetchDevelopers from our SearchBar
