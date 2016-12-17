@@ -6,7 +6,7 @@ export const FETCH_DEVELOPERS = 'FETCH_DEVELOPERS';
 export function fetchDevelopers(company) {
   const url = 'https://api.github.com/graphql';
   const config = {headers:
-                    {'Authorization': 'bearer 68d7083aaeb10aa85af668e3da2ec8aa62a7b00c',
+                    {'Authorization': 'bearer bf7332db04fd82619ae2bfc819245fc4fd76ea45',
                      'Content-Type': 'application/json'}
                   }
 

@@ -6,7 +6,7 @@ function calculateDevPrice(devData) {
 
 export default function Card({devInfo}) {
   const devWage = calculateDevPrice(devInfo);
-
+  console.log(devInfo);
   return (
     <article className="dev-card mw5 br3 pb3 ph4 ma3 ba b--black-10 dib">
       <div className="tc">
@@ -14,20 +14,20 @@ export default function Card({devInfo}) {
           <div className="nowrap">
             <p className="dim f8 f8-ns dib mh2">
               <i className="fa fa-rss gray" aria-hidden="true" />
-              {' ' + devInfo.followers}
+              {' ' + devInfo.nFollowers}
             </p>
             <p className="dim f8 f8-ns dib mh2">
               <i className="fa fa-star gray" aria-hidden="true" />
-              {' ' + devInfo.stars}
+              {' ' + devInfo.nStars}
             </p>
             <p className="dim f8 f8-ns dib mh2">
               <i className="fa fa-upload gray" aria-hidden="true" />
-              {' ' + devInfo.yearContributions}
+              {' ' + devInfo.nRepos}
             </p>
           </div>
         </nav>
 
-        <img src="http://tachyons.io/img/avatar_1.jpg" className="br-100 h3 w3 dib" title="Kitty staring at you" />
+        <img src={devInfo.avatarUrl} className="br-100 h3 w3 dib" title="Kitty staring at you" />
 
         <div className="dev-info">
           <h1 className="f4">{devInfo.name}</h1>
