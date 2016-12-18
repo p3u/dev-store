@@ -1,21 +1,53 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { fetchSingleDeveloper } from '../actions/index';
+import LanguagesPanel from './LanguagesPanel';
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { developer: undefined };
+  }
+
+  componentWillMount() {
+    // This perfomance could be improved if I used a hash (object) instead
+    // of looping over the array of devs. But I think it's perfectionism
+    // since it's unlikely that this array will grow so much that a O(n)
+    // operation becomes slow.
+
+    // A little convoluted... needs to be cleaned
+    // Looping over devs, if not found, fetch
+    // Once fetch promise is resolved, loop again to grab fetched dev
+    let developer  = this.props.developers.find((dev) => dev.id === this.props.params.id);
+    this.setState( {developer} );
+    if ( developer === undefined ){
+      this.props.fetchSingleDeveloper(this.props.params.id)
+      .then( () => {
+        developer = this.props.developers.find((dev) => dev.id === this.props.params.id);
+        this.setState( {developer} );
+      });
+    }
+  }
+
   render(){
+    console.log("hi")
+    const dev = this.state.developer
+    if (dev === undefined){
+      return <p> Loading </p>
+    }
+    debugger
     return (
-
-
       <section class="cf w-100 pa2-ns">
         <div className="basic-info cf ph2-ns ba">
           <div className="avatar fl w-100 w-50-m w-third-ns pa2 ba">
-            <img className="profile-img h5 w5" src="http://tachyons.io/img/avatar_1.jpg" title="Kitty staring at you" />
+            <img className="profile-img h5 w5" src={dev.avatarUrl} title="Kitty staring at you" />
           </div>
           <div className="contact-info fl w-50-m w-100 w-third-ns pa2 ba">
-            <p>Developer Name</p>
-            <p>pedro.saadi.aquino@gmail.com</p>
-            <a href="#">p3u.github.io/Portifolio</a>
-            <p>Rio de Janeiro</p>
+            <p>{dev.name}</p>
+            <p>{dev.email}</p>
+            <a href={dev.website}>{dev.website}</a>
+            <p>{dev.location}</p>
             <p>R$ 150</p>
           </div>
           <div className="organizations fl w-50-m w-100 w-third-ns pa2 ba">
@@ -33,22 +65,13 @@ class Profile extends Component {
         </div>
 
         <div className="profile-bio cf ph2-ns pa2 ba">
-          <article>Full Stack Developer. Working with React, React Native and other cool things!</article>
+          <article>{dev.bio}</article>
         </div>
 
 
         <div className="programming-info w-100-m cf ph2-ns ba">
           <div className="dev-skills fl w-100 w-100-m w-25-ns pa2 ba">
-            <div className="programming-languages w-50-m fl-m ba v2">
-              <ul>
-                <li>Javascript</li>
-                <li>CofeeScript</li>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>Python</li>
-                <li>C#</li>
-              </ul>
-            </div>
+            <LanguagesPanel languages={dev.languages} />
             <div className="github-badges w-100 w-50-m fl-m ba v2">
               <ul>
                 <li>100</li>
@@ -102,4 +125,8 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+function mapStateToProps( {developers} ) {
+  return { developers };
+}
+
+export default connect(mapStateToProps, { fetchSingleDeveloper })(Profile);

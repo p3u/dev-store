@@ -8,26 +8,41 @@ export default function CatalogQuery(organization){
           edges {
             cursor
             node {
+              name
+              avatarURL
+              login
+              email
+              websiteURL
+              bio
+              location
               followers {
                 totalCount
               }
-              repositories {
-                totalCount
+              organizations (first: 10) {
+                edges {
+                  node {
+                    avatarURL
+                    name
+                  }
+                }
               }
-              location
-              contributedRepositories(first: 30) {
+              repositories (first: 10) {
                 totalCount
                 edges {
                   node {
-                    stargazers {
-                      totalCount
+                    name
+                    description
+                    languages(first: 4) {
+                      edges {
+                        node {
+                          name
+                          color
+                        }
+                      }
                     }
                   }
                 }
               }
-              id
-              name
-              avatarURL
             }
           }
         }
