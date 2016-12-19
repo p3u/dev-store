@@ -33,8 +33,10 @@ function cleanDevelopersData(response){
         email: dev.email,
         organizations: dev.organizations.edges.map(( {node : org} ) => org),
         repos: dev.repositories.edges.map(
-          ( {node: repo} ) => ({ name: repo.name, description: repo.description })
-        ),
+          ( {node: repo} ) => ({ name: repo.name,
+                                 description: repo.description,
+                                 stars: repo.stargazers.totalCount }) )
+                                 .sort( ({stars: a},{stars: b}) => b-a),
         languages: languages,
         avatarUrl: dev.avatarURL,
         nStars: dev.repositories.edges

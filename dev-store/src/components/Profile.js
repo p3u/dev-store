@@ -80,6 +80,7 @@ class Profile extends Component {
               </ul>
             </div>
           </div>
+          {console.log(dev.repos)}
            <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
         </div>
       </section>

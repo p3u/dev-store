@@ -20,7 +20,7 @@ export default function SingleDevQuery(login){
             }
           }
         }
-        repositories (first: 10) {
+        repositories (first: 30) {
           totalCount
           edges {
             node {
