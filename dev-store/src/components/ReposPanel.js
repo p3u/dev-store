@@ -7,8 +7,8 @@ import _ from 'lodash';
 function renderRepoTile(repo, idx) {
   console.log(repo)
   return (
-    <div key={idx} className="repo-card fl w-100 h-100 w-third-ns pa2 ba">
-      <h4 className="dib mv3">{repo.name}</h4>
+    <div key={idx} className="repo-card overflow-y-auto fl w-100 h-100 w-third-ns pa2 ba br3  b--light-silver">
+      <h4 className="dib hyphenate mv3">{repo.name}</h4>
       <div className="dib fr mv3 mr1">
         <i className="fa fa-star gray" aria-hidden="true" />
         {' ' + repo.stars}
@@ -21,7 +21,7 @@ function renderRepoTile(repo, idx) {
 function renderRepoRow(repos, key) {
   console.log(repos)
    return (
-        <div key={key} className="repo-row h5 cf ph2-ns ba">
+        <div key={key} className="repo-row h5 cf">
           { repos.map( (repo, idx) => renderRepoTile(repo, idx) )  }
         </div>
    );
@@ -30,7 +30,7 @@ function renderRepoRow(repos, key) {
 export default function LanguagesPanel( {repos: allRepos, tilesPerRows} ){
   const reposRows = _.chunk(allRepos, tilesPerRows);
   return (
-    <div className="github-repos fl w-100 w-100-m w-75-ns pa2 ba">
+    <div className="github-repos fl w-100 w-100-m w-75-ns pa2">
        { reposRows.map( (repos, idx) => renderRepoRow(repos, idx) )  }
     </div>
   );

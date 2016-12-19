@@ -11,3 +11,7 @@ body {
 .dev-info {
   height: 160px;
 }
+
+.hyphenate {
+ word-wrap: break-word
+}

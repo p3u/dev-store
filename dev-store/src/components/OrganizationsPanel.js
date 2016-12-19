@@ -8,7 +8,7 @@ function renderOrgTile(org, key) {
   return (
     <div key={key} className="org-card fl w-100 w-third-ns pa2 ba">
       <img src={org.avatarURL} title="Organization Logo" />
-      <h4>{org.name}</h4>
+      <h4 className="hyphenate">{org.name}</h4>
     </div>
   );
 }

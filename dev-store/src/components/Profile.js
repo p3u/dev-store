@@ -67,7 +67,7 @@ class Profile extends Component {
 
 
         <div className="programming-info w-100-m cf ph2-ns ba">
-          <div className="dev-skills fl w-100 w-100-m w-25-ns pa2 ba">
+          <div className="dev-skills fl w-100 w-100-m w-25-ns pa2">
             <LanguagesPanel languages={dev.languages} />
             <div className="github-badges w-100 w-50-m fl-m ba v2">
               <ul>
@@ -80,7 +80,6 @@ class Profile extends Component {
               </ul>
             </div>
           </div>
-          {console.log(dev.repos)}
            <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
         </div>
       </section>

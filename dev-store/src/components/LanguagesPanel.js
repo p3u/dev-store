@@ -12,8 +12,8 @@ function renderPills(languages) {
 
 export default function LanguagesPanel( {languages} ){
   return (
-    <div className="programming-languages w-50-m fl-m ba v2">
-      <ul className="list pl0 ml0 center mw5 ba b--light-silver br3">
+    <div className="programming-languages w-50-m fl-m">
+      <ul className="list pl0 ml0 mv0 center mw5 ba b--light-silver br3">
         { renderPills(languages) }
       </ul>
     </div>
