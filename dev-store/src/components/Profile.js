@@ -47,7 +47,8 @@ class Profile extends Component {
       <section class="cf w-100 pa2-ns">
         <div className="basic-info cf ph2-ns ba">
           <div className="avatar fl w-100 w-50-m w-third-ns pa2 ba">
-            <img className="profile-img h5 w5" src={dev.avatarUrl} title="Kitty staring at you" />
+            <img className="profile-img h5 w5" src={dev.avatarUrl}
+                                               title="Avatar" />
           </div>
           <div className="contact-info fl w-50-m w-100 w-third-ns pa2 ba">
             <p>{dev.name}</p>
@@ -56,7 +57,8 @@ class Profile extends Component {
             <p>{dev.location}</p>
             <p>R$ 150</p>
           </div>
-          <OrganizationsPanel organizations={dev.organizations} tilesPerRows={3} />
+          <OrganizationsPanel organizations={dev.organizations.slice(0,3)}
+                              tilesPerRows={3} />
         </div>
 
         <div className="profile-bio cf ph2-ns pa2 ba">

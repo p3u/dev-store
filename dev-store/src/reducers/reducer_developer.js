@@ -36,9 +36,11 @@ function cleanDevelopersData(response){
           ( {node: repo} ) => ({ name: repo.name, description: repo.description })
         ),
         languages: languages,
-        // nContibutedRepos: dev.contributedRepos.totalCount,
         avatarUrl: dev.avatarURL,
-        nStars: 300 // TODO: Calculate nStars
+        nStars: dev.repositories.edges
+                        .reduce( (total, {node: repo}) => {
+                                  return total + repo.stargazers.totalCount },
+                               0)
       };
     }
   );

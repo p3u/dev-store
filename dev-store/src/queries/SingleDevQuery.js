@@ -26,6 +26,9 @@ export default function SingleDevQuery(login){
             node {
               name
               description
+              stargazers {
+                totalCount
+              }
               languages(first: 4) {
                 edges {
                   node {

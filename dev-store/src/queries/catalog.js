@@ -26,12 +26,15 @@ export default function CatalogQuery(organization){
                   }
                 }
               }
-              repositories (first: 10) {
+              repositories (first: 30) {
                 totalCount
                 edges {
                   node {
                     name
                     description
+                    stargazers{
+                      totalCount
+                    }
                     languages(first: 4) {
                       edges {
                         node {
