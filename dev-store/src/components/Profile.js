@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchSingleDeveloper } from '../actions/index';
 import LanguagesPanel from './LanguagesPanel';
 import ReposPanel from './ReposPanel';
+import OrganizationsPanel from './OrganizationsPanel';
 
 class Profile extends Component {
   constructor(props) {
@@ -36,8 +37,9 @@ class Profile extends Component {
   }
 
   render(){
-    console.log("hi")
+
     const dev = this.state.developer
+    console.log(dev)
     if (dev === undefined){
       return <p> Loading </p>
     }
@@ -54,18 +56,7 @@ class Profile extends Component {
             <p>{dev.location}</p>
             <p>R$ 150</p>
           </div>
-          <div className="organizations fl w-50-m w-100 w-third-ns pa2 ba">
-            <div className="organizations-row cf ph2-ns ba">
-              <div className="org-card fl w-100 w-third-ns pa2 ba">org1</div>
-              <div className="org-card fl w-100 w-third-ns pa2 ba">org2</div>
-              <div className="org-card fl w-100 w-third-ns pa2 ba">org3</div>
-            </div>
-            <div className="organizations-row cf ph2-ns ba">
-              <div className="org-card fl w-100 w-third-ns pa2 ba">org4</div>
-              <div className="org-card fl w-100 w-third-ns pa2 ba">org5</div>
-              <div className="org-card fl w-100 w-third-ns pa2 ba">org6</div>
-            </div>
-          </div>
+          <OrganizationsPanel organizations={dev.organizations} tilesPerRows={3} />
         </div>
 
         <div className="profile-bio cf ph2-ns pa2 ba">
