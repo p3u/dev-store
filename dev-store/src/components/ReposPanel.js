@@ -27,7 +27,7 @@ function renderRepoRow(repos, key) {
    );
 }
 
-export default function LanguagesPanel( {repos: allRepos, tilesPerRows} ){
+export default function ReposPanel( {repos: allRepos, tilesPerRows} ){
   const reposRows = _.chunk(allRepos, tilesPerRows);
   return (
     <div className="github-repos fl w-100 w-100-m w-75-ns pa2">

@@ -5,6 +5,7 @@ import { fetchSingleDeveloper } from '../actions/index';
 import LanguagesPanel from './LanguagesPanel';
 import ReposPanel from './ReposPanel';
 import OrganizationsPanel from './OrganizationsPanel';
+import StatsPanel from './StatsPanel';
 
 class Profile extends Component {
   constructor(props) {
@@ -69,15 +70,10 @@ class Profile extends Component {
         <div className="programming-info w-100-m cf ph2-ns ba">
           <div className="dev-skills fl w-100 w-100-m w-25-ns pa2">
             <LanguagesPanel languages={dev.languages} />
-            <div className="github-badges w-100 w-50-m fl-m ba v2">
-              <ul>
-                <li>100</li>
-                <li>CofeeScript</li>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>Python</li>
-                <li>C#</li>
-              </ul>
+            <div className="stats-panel w-50-m fl-m">
+              <StatsPanel nFollowers={dev.nFollowers}
+                          nStars={dev.nStars}
+                          nRepos={dev.nRepos} />
             </div>
           </div>
            <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
