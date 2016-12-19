@@ -3,11 +3,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchSingleDeveloper } from '../actions/index';
 import LanguagesPanel from './LanguagesPanel';
+import ReposPanel from './ReposPanel';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = { developer: undefined };
+  }
+
+  findDev(id) {
+    return this.props.developers.find((dev) => dev.id === id);
   }
 
   componentWillMount() {
@@ -16,15 +21,15 @@ class Profile extends Component {
     // since it's unlikely that this array will grow so much that a O(n)
     // operation becomes slow.
 
-    // A little convoluted... needs to be cleaned
+    // A little convoluted...
     // Looping over devs, if not found, fetch
     // Once fetch promise is resolved, loop again to grab fetched dev
-    let developer  = this.props.developers.find((dev) => dev.id === this.props.params.id);
+    let developer  = this.findDev(this.props.params.id);
     this.setState( {developer} );
     if ( developer === undefined ){
       this.props.fetchSingleDeveloper(this.props.params.id)
       .then( () => {
-        developer = this.props.developers.find((dev) => dev.id === this.props.params.id);
+        developer = this.findDev(this.props.params.id);
         this.setState( {developer} );
       });
     }
@@ -36,8 +41,7 @@ class Profile extends Component {
     if (dev === undefined){
       return <p> Loading </p>
     }
-    debugger
-    return (
+      return (
       <section class="cf w-100 pa2-ns">
         <div className="basic-info cf ph2-ns ba">
           <div className="avatar fl w-100 w-50-m w-third-ns pa2 ba">
@@ -83,42 +87,7 @@ class Profile extends Component {
               </ul>
             </div>
           </div>
-          <div className="github-repos fl w-100 w-100-m w-75-ns pa2 ba">
-            <div className="repo-row cf ph2-ns ba">
-              <div className="repo-card fl w-100 w-third-ns pa2 ba">
-                <h4>Repo Title</h4>
-                <p>Repo description about the subject which in the ends means nothing but fools you</p>
-                <p>Repo Language</p>
-              </div>
-              <div className="repo-card fl w-100 w-third-ns pa2 ba">
-                <h4>Repo Title</h4>
-                <p>Repo description about the subject which in the ends means nothing but fools you</p>
-                <p>Repo Language</p>
-              </div>
-              <div className="repo-card fl w-100 w-third-ns pa2 ba">
-                <h4>Repo Title</h4>
-                <p>Repo description about the subject which in the ends means nothing but fools you</p>
-                <p>Repo Language</p>
-              </div>
-            </div>
-            <div className="repo-row cf ph2-ns ba">
-              <div className="repo-card fl w-100 w-third-ns pa2 ba">
-                <h4>Repo Title</h4>
-                <p>Repo description about the subject which in the ends means nothing but fools you</p>
-                <p>Repo Language</p>
-              </div>
-              <div className="repo-card fl w-100 w-third-ns pa2 ba">
-                <h4>Repo Title</h4>
-                <p>Repo description about the subject which in the ends means nothing but fools you</p>
-                <p>Repo Language</p>
-              </div>
-              <div className="repo-card fl w-100 w-third-ns pa2 ba">
-                <h4>Repo Title</h4>
-                <p>Repo description about the subject which in the ends means nothing but fools you</p>
-                <p>Repo Language</p>
-              </div>
-            </div>
-          </div>
+           <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
         </div>
       </section>
     );
