@@ -15,3 +15,30 @@ body {
 .hyphenate {
  word-wrap: break-word
 }
+
+@media (min-width: 480px) {
+   .w3-5-ns {
+     width: 6em;
+   }
+   .w4-5-ns {
+     width: 12em;
+   }
+ }
+
+@media (min-width: 480px) and (max-width: 960px) {
+    .w3-5-m {
+      width: 6em;
+    }
+    .w4-5-m {
+      width: 12em;
+    }
+  }
+
+  @media (min-width: 960px) {
+     .w3-5-l {
+       width: 6em;
+     }
+     .w4-5-l {
+       width: 12em;
+     }
+   }

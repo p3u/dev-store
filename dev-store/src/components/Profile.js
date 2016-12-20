@@ -46,37 +46,45 @@ class Profile extends Component {
     }
       return (
       <section class="cf w-100 pa2-ns">
-        <div className="basic-info cf ph2-ns ba">
-          <div className="avatar fl w-100 w-50-m w-third-ns pa2 ba">
-            <img className="profile-img h5 w5" src={dev.avatarUrl}
+        <div className="basic-info cf ph2-ns ">
+          <div className="avatar fl w-100 w-25-m w-25-ns h5-ns pa2 ">
+            <img className="profile-img w-100" src={dev.avatarUrl}
                                                title="Avatar" />
           </div>
-          <div className="contact-info fl w-50-m w-100 w-third-ns pa2 ba">
+          <div className="contact-info fl w-25-m w-100 w-25-ns h5-ns pa2 ">
+            <div className="ph3 white pv2 bb b--light-silver bg-black-70">
+               Contact Info
+             </div>
             <p>{dev.name}</p>
             <p>{dev.email}</p>
             <a href={dev.website}>{dev.website}</a>
             <p>{dev.location}</p>
             <p>R$ 150</p>
+            <div className="profile-bio cf ph2-ns pa2 ">
+              <article>{dev.bio}</article>
+            </div>
           </div>
-          <OrganizationsPanel organizations={dev.organizations.slice(0,3)}
-                              tilesPerRows={3} />
+          <div className="organizations fl w-50-m w-100 w-50-ns pa2 ">
+            <OrganizationsPanel organizations={dev.organizations.slice(0,3)}
+                                tilesPerRows={3} />
+          </div>
         </div>
 
-        <div className="profile-bio cf ph2-ns pa2 ba">
-          <article>{dev.bio}</article>
-        </div>
 
-
-        <div className="programming-info w-100-m cf ph2-ns ba">
-          <div className="dev-skills fl w-100 w-100-m w-25-ns pa2">
-            <LanguagesPanel languages={dev.languages} />
-            <div className="stats-panel w-50-m fl-m">
+        <div className="programming-info cf ph2-ns ">
+          <div className="dev-skills fl w-100 w-25-m w-25-ns pa2">
+            <div className="stats-panel w-100 fl-m mb2">
               <StatsPanel nFollowers={dev.nFollowers}
                           nStars={dev.nStars}
                           nRepos={dev.nRepos} />
             </div>
+            <div className="programming-languages w-100">
+              <LanguagesPanel languages={dev.languages} />
+            </div>
           </div>
-           <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
+          <div className="github-repos fl w-100 w-75-m w-75-ns pa2">
+            <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
+          </div>
         </div>
       </section>
     );

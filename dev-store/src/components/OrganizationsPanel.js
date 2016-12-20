@@ -6,16 +6,16 @@ import _ from 'lodash';
 
 function renderOrgTile(org, key) {
   return (
-    <div key={key} className="org-card fl w-100 w-third-ns pa2 ba">
-      <img src={org.avatarURL} title="Organization Logo" />
-      <h4 className="hyphenate">{org.name}</h4>
+    <div key={key} className="org-card fl w-100 w-third-ns pa2 tc bl br h-100">
+      <img className="h4-l h3-5-m h2" src={org.avatarURL} title="Organization Logo" />
+      <p className="hyphenate dn db-l">{org.name}</p>
     </div>
   );
 }
 
 function renderOrgRow(orgs, key) {
    return (
-        <div key={key} className="organizations-row cf ph2-ns ba">
+        <div key={key} className="organizations-row cf ba h-100">
           { orgs.map( (org, idx) => renderOrgTile(org, idx) )  }
         </div>
    );
@@ -26,7 +26,10 @@ export default function OrganizationsPanel( {organizations: allOrgs, tilesPerRow
   const orgsRows = _.chunk(allOrgs, tilesPerRows);
   console.log(orgsRows)
   return (
-    <div className="organizations fl w-50-m w-100 w-third-ns pa2 ba">
+    <div className="w-100 h5-ns h4-m">
+      <div className="ph3 white pv2 bb b--light-silver bg-black-70">
+         Organizations
+       </div>
        { orgsRows.map( (orgs, idx) => renderOrgRow(orgs, idx) )  }
     </div>
   );
