@@ -7,7 +7,7 @@ import _ from 'lodash';
 function renderOrgTile(org, key) {
   return (
     <div key={key} className="org-card fl w-100 w-third-ns pa2 tc bl br h-100">
-      <img className="h4-l h3-5-m h2" src={org.avatarURL} title="Organization Logo" />
+      <img className="h4-l wh3-5-m h2" src={org.avatarURL} title="Organization Logo" />
       <p className="hyphenate dn db-l">{org.name}</p>
     </div>
   );
