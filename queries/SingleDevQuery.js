@@ -1,4 +1,4 @@
-export default function SingleDevQuery(login){
+export default function singleDevQuery(login){
   const BaseQuery =
   `{"query": "query {
       user(login: \\"${login}\\") {

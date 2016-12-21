@@ -1,9 +1,9 @@
-export default function CatalogQuery(organization){
+export default function organizationsDevsQuery(organization){
   const BaseQuery =
   `{"query": "query {
       organization(login: \\"${organization}\\") {
         login
-        members(first: 30) {
+        members(first: 8) {
           totalCount
           edges {
             cursor

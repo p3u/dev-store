@@ -15,4 +15,4 @@ build
 npm-debug.log
 token.js
 cra-server-ex.graffle
-dbtoken.js
+tokens.js
