@@ -11,15 +11,15 @@ Sinta-se confortável para focar nas áreas que você tem mais habilidade.
 Priorize a lista de tarefas abaixo explicando os motivos da priorização de cada uma delas. Então, escolha seis tarefas para implementar.
 
 * Criar as páginas: catálogo de desenvolvedores, pagina do desenvolvedor e carrinho
+* Determinar o preço do desenvolvedor a partir de informações do seu perfil do GitHub, como por exemplo: followers, repos, stars, * commits, etc.
 * Criar uma paginação para o catálogo de desenvolvedores.
 * Popular o catálogo de desenvolvedores a partir de uma organização do GitHub.
 * Permitir a escolha de quantidade de horas contratadas de cada desenvolvedor.
 * Permitir a adição de um cupom de desconto que altera o preço total da compra. Utilize o código "SHIPIT".
 * Adicionar um botão de "Finalizar compra" que leva o usuário a uma página de pedido confirmado.
-* Determinar o preço do desenvolvedor a partir de informações do seu perfil do GitHub, como por exemplo: followers, repos, stars, * commits, etc.
 * Criar uma ordenação para o catálogo de desenvolvedores.
-* Transforme a aplicação em um Progressive Web App.
 * Faça sua API ser GraphQL.
+* Transforme a aplicação em um Progressive Web App.
 
 ## Server side
 

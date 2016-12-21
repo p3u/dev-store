@@ -7,9 +7,11 @@
 **Redis**
 * guardar estado do carrinho
 * cache requests pro api? Vai dar um trabalho do cão pra evitar alguns requests e correr o risco de dados sem sync.
+* talvez não de um trabalho do cão
 
 **Dataloader**
 * batch & cache? acho que não vou usar...
+* é não vou usar...
 
 **React**
 * Criar as views
