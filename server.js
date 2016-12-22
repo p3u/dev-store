@@ -37,27 +37,27 @@ app.use(allowCrossDomain);
 //  Fetches a single dev
 app.get('/api/dev/:gitlogin', function(req, res) {
   const { gitlogin }  = req.params;
-  gh.query(singleDevQuery, gitlogin).then(
+  gh.query(singleDevQuery, gitlogin, false).then(
     function(response) {
       res.status(response.status).json(response.data);
     },
     function(error) {
       res.status(error.response.status).send(error.response.data.message);
     }
-  );
+  ).catch(e => res.status(500).send("Couldn't fetch data"));
 });
 
 // Fetches 8 devs from an organizaiton
 app.get('/api/devs/:organization/:pagination', function(req, res) {
   const { organization, pagination } = req.params;
-  gh.query(organizationsDevsQuery, organization).then(
+  gh.query(organizationsDevsQuery, organization, true).then(
     function(response) {
       res.status(response.status).json(response.data);
     },
     function(error) {
       res.status(error.response.status).send(error.response.data.message);
     }
-  );
+  ).catch(e => res.status(500).send("Couldn't fetch data"));
 });
 
 // Fetches shopping cart NEEDs AUTH
