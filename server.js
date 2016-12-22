@@ -5,19 +5,18 @@ import { DB_TOKEN } from './tokens';
 import singleDevQuery from './queries/SingleDevQuery';
 import organizationsDevsQuery from './queries/OrganizationsDevsQuery';
 import { gh } from './github';
+import uuidV4 from 'uuid/v4';
 
 const app = express();
 
-// // DB Setup
-// let client = redis.createClient(16329, "redis-16329.c10.us-east-1-4.ec2.cloud.redislabs.com");
-// client.auth(DB_TOKEN, function() {
-//   client.setex('test', 60, 50);;
-// });
-//
-// // if an error occurs, print it to the console
-// client.on('error', function (err) {
-//     console.log("Error " + err);
-// });
+// DB Setup
+let client = redis.createClient(16329, "redis-16329.c10.us-east-1-4.ec2.cloud.redislabs.com");
+client.auth(DB_TOKEN);
+
+// if an error occurs, print it to the console
+client.on('error', function (err) {
+    console.log("Error " + err);
+});
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -50,15 +49,31 @@ app.get('/api/dev/:gitlogin', function(req, res) {
 // Fetches 8 devs from an organizaiton
 app.get('/api/devs/:organization/:pagination', function(req, res) {
   const { organization, pagination } = req.params;
-  gh.query(organizationsDevsQuery, organization, true).then(
-    function(response) {
+  gh.query(organizationsDevsQuery, organization, true)
+  .then(
+    (response) => {
       res.status(response.status).json(response.data);
     },
-    function(error) {
+    (error) => {
       res.status(error.response.status).send(error.response.data.message);
     }
   ).catch(e => res.status(500).send("Couldn't fetch data"));
 });
+
+
+// Creates a new user-key to identify  the shopper
+app.post('/api/new/user', function(req, res) {
+  const userid = uuidV4();
+  client.hset(userid, 'coupon', 'false', (e, result) => {
+    if(result === 1){
+      res.status(201).cookie('user', userid).send(userid);
+    }
+    else {
+      res.status(500).send(e);
+    }
+  });
+});
+
 
 // Fetches shopping cart NEEDs AUTH
 app.get('/api/cart/:userid', function(req, res) {
