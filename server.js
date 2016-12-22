@@ -62,6 +62,7 @@ app.get('/api/devs/:organization/:pagination', function(req, res) {
 
 
 // Creates a new user-key to identify  the shopper
+// TODO: expire the cookie and the redis set
 app.post('/api/new/user', function(req, res) {
   const userid = uuidV4();
   client.hset(userid, 'coupon', 'false', (e, result) => {
