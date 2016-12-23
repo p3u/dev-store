@@ -65,7 +65,7 @@ app.get('/api/devs/:organization/:pagination', function(req, res) {
 // TODO: expire the cookie and the redis set
 app.post('/api/new/user', function(req, res) {
   const userid = uuidV4();
-  dbClient.hset(userid, 'coupon-vZa5vSYwpWpH73f', 'false', (err, result) => {
+  dbClient.hset(userid, 'discount', 0, (err, result) => {
     if(result === 1){
       res.status(201).cookie('userid', userid).send(userid);
     }
@@ -110,8 +110,13 @@ app.post('/api/cart/add/:userid/:gitlogin', function(req, res) {
       }
       else if(exists){
         dbClient.hset(userid, gitlogin, 1, (err, result) => {
-          if(result === 1){
-            res.status(201).send(userid);
+          if( err ){
+            res.status(500).json( {success: false, error: err} )
+          }
+          else {
+            let developer = {}
+            developer[gitlogin] = 1;
+            res.status(201).json( {success: true, developer: developer });
           }
         });
       }
@@ -130,8 +135,11 @@ app.delete('/api/cart/delete/:userid/:gitlogin', function(req, res) {
       }
       else if(exists){
         dbClient.hdel(userid, gitlogin, (err, result) => {
-          if(result === 1){
-            res.status(200).send(gitlogin);
+          if( err ){
+            res.status(500).json( {success: false, error: err} )
+          }
+          else {
+            res.status(200).json({success: true, devId: gitlogin});
           }
         });
       }
