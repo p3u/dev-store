@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchSingleDeveloper } from '../actions/index';
 
 class CheckoutItem extends Component {
+
+  componentWillMount(){
+
+  }
+
   render(){
     return (
       <li key={this.props.itemInfo.id} className="flex items-center lh-copy pa3 ph0-l bb b--black-10">
@@ -24,4 +32,13 @@ class CheckoutItem extends Component {
   }
 }
 
-export default CheckoutItem
+
+function mapStateToProps( { cart, developers } ) {
+  return { cart, developers };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchSingleDeveloper }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutItem);
