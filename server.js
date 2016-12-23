@@ -175,14 +175,12 @@ app.post('/api/cart/apply/coupon/:code/:userid', function(req, res) {
       }
       else if(exists){
         const codeData = promocodes[code]
-        let updates = { discount: codeData.amount };
-        updates[codeData.key] = true;
-        dbClient.hmset(userid, updates, (err, result) => {
+        dbClient.hmset(userid, 'discount_amount', codeData.amount, (err, result) => {
           if(err) {
             res.status(500).send(err);
           }
           else {
-            res.status(200).send( {success: true, discount: codeData.amount} );
+            res.status(200).send( {success: true, discount_amount: codeData.amount} );
           }
         });
       }
