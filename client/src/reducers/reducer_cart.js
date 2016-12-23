@@ -15,8 +15,8 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
       if( !action.payload.data.success ) {
         return state;
       }
-      const developerId = action.payload.data;
-      let newDevelopers = Object.assign({}, developer);
+      const developerId = action.payload.data.devId;
+      let newDevelopers = Object.assign({}, state.developers);
       delete newDevelopers[developerId];
       return { developers: newDevelopers,
                discount: state.discount,

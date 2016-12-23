@@ -7,14 +7,13 @@ import { fetchSingleDeveloper } from '../actions/index';
 
 class Checkout extends Component {
   render(){
-    debugger
     if ( this.props.cart.loading ) {
       return <p>Loading...</p>
     }
 
     return (
       <div className="w-100">
-        <CheckoutList developers={this.props.cart.developers}/>
+        <CheckoutList developersInCart={this.props.cart.developers}/>
       </div>
     );
   }

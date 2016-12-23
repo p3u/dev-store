@@ -27,7 +27,6 @@ export function setCurrentOrg(organization) {
 }
 
 export function fetchSingleDeveloper(login) {
-  debugger
   const request = axios.get(`${BASE_URL}/dev/${login}`);
   return {
     type: FETCH_SINGLE_DEVELOPER,

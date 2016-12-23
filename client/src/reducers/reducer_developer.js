@@ -53,7 +53,6 @@ export default function(state = [], action) {
     case FETCH_DEVELOPERS:
       return cleanDevelopersData(action.payload.data).concat(state);
     case FETCH_SINGLE_DEVELOPER:
-      debugger
       return cleanDevelopersData(action.payload.data).concat(state);
     default:
       return state;
