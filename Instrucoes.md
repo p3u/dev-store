@@ -10,16 +10,16 @@ Sinta-se confortável para focar nas áreas que você tem mais habilidade.
 
 Priorize a lista de tarefas abaixo explicando os motivos da priorização de cada uma delas. Então, escolha seis tarefas para implementar.
 
-* Criar as páginas: catálogo de desenvolvedores, pagina do desenvolvedor e carrinho
-* Criar uma paginação para o catálogo de desenvolvedores.
-* Popular o catálogo de desenvolvedores a partir de uma organização do GitHub.
-* Permitir a escolha de quantidade de horas contratadas de cada desenvolvedor.
-* Permitir a adição de um cupom de desconto que altera o preço total da compra. Utilize o código "SHIPIT".
-* Adicionar um botão de "Finalizar compra" que leva o usuário a uma página de pedido confirmado.
-* Determinar o preço do desenvolvedor a partir de informações do seu perfil do GitHub, como por exemplo: followers, repos, stars, * commits, etc.
-* Criar uma ordenação para o catálogo de desenvolvedores.
-* Transforme a aplicação em um Progressive Web App.
-* Faça sua API ser GraphQL.
+* Criar as páginas: catálogo de desenvolvedores, pagina do desenvolvedor e carrinho (Basico para o site funcionar)
+* Criar uma paginação para o catálogo de desenvolvedores. (Importante para não ficar lento)
+* Popular o catálogo de desenvolvedores a partir de uma organização do GitHub. (Precisa de uma forma de popular, o API de GQL tem essa opção)
+* Permitir a escolha de quantidade de horas contratadas de cada desenvolvedor. (Fácil de implementar e importante feature para um site de contratar pessoas)
+* Determinar o preço do desenvolvedor a partir de informações do seu perfil do GitHub, como por exemplo: followers, repos, stars, * commits, etc. (Mesma razão acima)
+* Adicionar um botão de "Finalizar compra" que leva o usuário a uma página de pedido confirmado. (Mesma razão acima)
+* Permitir a adição de um cupom de desconto que altera o preço total da compra. Utilize o código "SHIPIT". (Mesma razão acima)
+* Criar uma ordenação para o catálogo de desenvolvedores. (Chato de implementar por causa da paginação. Teria que ler todos os desenvolvedores da org para pode ordenar por exemplo por preço. É uma boa feature, mas deixaria pra depois)
+* Transforme a aplicação em um Progressive Web App. (Também seria legal ter o site em Progressive Web App... mas não sei estimar quanto tempo demora, prefiro deixar para depois)
+* Faça sua API ser GraphQL (Nem daria tanto trabalho, mas considerando que a API é basica (poucas URIs) acho besteira implementar. Aumentaria a complexidade do projeto com mais uma tecnologia, e sinceramente não vejo tanto valor para esse projeto. Pode ser feito depois de qualquer maneira).
 
 ## Server side
 
