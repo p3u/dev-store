@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { fetchSingleDeveloper } from '../actions/index';
 
 class CheckoutItem extends Component {
-
-  componentWillMount(){
-
-  }
 
   render(){
     return (
       <li key={this.props.itemInfo.id} className="flex items-center lh-copy pa3 ph0-l bb b--black-10">
-          <img className="w2 h2 w3-ns h3-ns br-100" src="http://tachyons.io/img/avatar-mrmrs.jpg" alt="Avatar"/>
+          <img className="w2 h2 w3-ns h3-ns br-100" src={this.props.itemInfo.avatarUrl} alt="Avatar"/>
           <div className="pl3 flex-auto">
-            <span className="f6 db black-70">Mrmrs</span>
-            <span className="f6 db black-70">Medium Hexagon, LLC</span>
+            <span className="f6 db black-70">{this.props.itemInfo.name}</span>
+            <span className="f6 db black-70">{this.props.itemInfo.org}</span>
           </div>
           <div className="pl5">
             <input className="f6 w3" type="number" name="quantity" min="0" value={this.props.itemInfo.hours}/>
@@ -32,13 +25,4 @@ class CheckoutItem extends Component {
   }
 }
 
-
-function mapStateToProps( { cart, developers } ) {
-  return { cart, developers };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchSingleDeveloper }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CheckoutItem);
+export default CheckoutItem;

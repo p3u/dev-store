@@ -10,7 +10,6 @@ import Cookies from 'cookies-js';
 class App extends Component {
 
   componentWillMount() {
-    debugger
     // If user cookie exists, fetch users cart
     const userid = Cookies.get('userid');
     if( userid ){

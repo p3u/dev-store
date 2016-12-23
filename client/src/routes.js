@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
 import CatalogBrowser from './components/CatalogBrowser';
-import Checkout from './components/Checkout';
+import Checkout from './containers/Checkout';
 import Profile from './components/Profile';
 
 export default (
