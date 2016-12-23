@@ -6,6 +6,7 @@ import LanguagesPanel from './LanguagesPanel';
 import ReposPanel from './ReposPanel';
 import OrganizationsPanel from './OrganizationsPanel';
 import StatsPanel from './StatsPanel';
+import AddCartButton from '../containers/AddCartButton';
 
 class Profile extends Component {
   constructor(props) {
@@ -38,23 +39,25 @@ class Profile extends Component {
   }
 
   render(){
-
     const dev = this.state.developer
-    console.log(dev)
     if (dev === undefined){
       return <p> Loading </p>
     }
-      return (
-      <section class="cf w-100 pa2-ns">
-        <div className="basic-info cf ph2-ns ">
-          <div className="avatar fl w-100 w-25-m w-25-ns h5-ns pa2 ">
-            <img className="profile-img w-100" src={dev.avatarUrl}
-                                               title="Avatar" />
+    console.log(dev)
+
+    return (
+    <section class="cf w-100 pa2-ns">
+      <div className="basic-info cf ph2-ns ">
+        <AddCartButton devId={dev.id} />
+        <div className="avatar fl w-100 w-25-m w-25-ns h5-ns pa2 db cb ">
+          <img className="profile-img w-100 h5-ns h4-m" src={dev.avatarUrl}
+                                             title="Avatar" />
+        </div>
+        <div className="contact-info fl w-25-m w-100 w-25-ns h5-ns pa2 ">
+          <div className="ph3 white pv2 bb b--light-silver bg-black-70">
+             Contact Info
           </div>
-          <div className="contact-info fl w-25-m w-100 w-25-ns h5-ns pa2 ">
-            <div className="ph3 white pv2 bb b--light-silver bg-black-70">
-               Contact Info
-             </div>
+          <div className="h5-ns h4-m">
             <p>{dev.name}</p>
             <p>{dev.email}</p>
             <a href={dev.website}>{dev.website}</a>
@@ -64,30 +67,31 @@ class Profile extends Component {
               <article>{dev.bio}</article>
             </div>
           </div>
-          <div className="organizations fl w-50-m w-100 w-50-ns pa2 ">
-            <OrganizationsPanel organizations={dev.organizations.slice(0,3)}
-                                tilesPerRows={3} />
-          </div>
         </div>
+        <div className="organizations fl w-50-m w-100 w-50-ns pa2 ">
+          <OrganizationsPanel organizations={dev.organizations.slice(0,3)}
+                              tilesPerRows={3} />
+        </div>
+      </div>
 
 
-        <div className="programming-info cf ph2-ns ">
-          <div className="dev-skills fl w-100 w-25-m w-25-ns pa2">
-            <div className="stats-panel w-100 fl-m mb2">
-              <StatsPanel nFollowers={dev.nFollowers}
-                          nStars={dev.nStars}
-                          nRepos={dev.nRepos} />
-            </div>
-            <div className="programming-languages w-100">
-              <LanguagesPanel languages={dev.languages} />
-            </div>
+      <div className="programming-info cf ph2-ns ">
+        <div className="dev-skills fl w-100 w-25-m w-25-ns pa2">
+          <div className="stats-panel w-100 fl-m mb2">
+            <StatsPanel nFollowers={dev.nFollowers}
+                        nStars={dev.nStars}
+                        nRepos={dev.nRepos} />
           </div>
-          <div className="github-repos fl w-100 w-75-m w-75-ns pa2">
-            <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
+          <div className="programming-languages w-100">
+            <LanguagesPanel languages={dev.languages} />
           </div>
         </div>
-      </section>
-    );
+        <div className="github-repos fl w-100 w-75-m w-75-ns pa2">
+          <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
+        </div>
+      </div>
+    </section>
+  );
   }
 }
 

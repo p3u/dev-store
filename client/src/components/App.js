@@ -6,7 +6,7 @@ import axios from 'axios';
 import Cookies from 'cookies-js';
 
 export default function App(props){
-  if( !Cookies.get('user') ){
+  if( !Cookies.get('userid') ){
   const BASE_URL  = `http://${window.location.hostname}:5000/api`
     axios.post(`${BASE_URL}/new/user`);
   }

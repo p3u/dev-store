@@ -6,15 +6,16 @@ import singleDevQuery from './queries/SingleDevQuery';
 import organizationsDevsQuery from './queries/OrganizationsDevsQuery';
 import { gh } from './github';
 import uuidV4 from 'uuid/v4';
+import { promocodes } from './promocodes';
 
 const app = express();
 
 // DB Setup
-let client = redis.createClient(16329, "redis-16329.c10.us-east-1-4.ec2.cloud.redislabs.com");
-client.auth(DB_TOKEN);
+let dbClient = redis.createClient(16329, "redis-16329.c10.us-east-1-4.ec2.cloud.redislabs.com");
+dbClient.auth(DB_TOKEN);
 
 // if an error occurs, print it to the console
-client.on('error', function (err) {
+dbClient.on('error', function (err) {
     console.log("Error " + err);
 });
 
@@ -26,7 +27,6 @@ const allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*'); // TODO: Configure only the right hosted domain for CORS
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
-
     next();
 }
 
@@ -65,12 +65,12 @@ app.get('/api/devs/:organization/:pagination', function(req, res) {
 // TODO: expire the cookie and the redis set
 app.post('/api/new/user', function(req, res) {
   const userid = uuidV4();
-  client.hset(userid, 'coupon', 'false', (e, result) => {
+  dbClient.hset(userid, 'coupon-vZa5vSYwpWpH73f', 'false', (err, result) => {
     if(result === 1){
-      res.status(201).cookie('user', userid).send(userid);
+      res.status(201).cookie('userid', userid).send(userid);
     }
-    else {
-      res.status(500).send(e);
+    else if(err){
+      res.status(500).send(err);
     }
   });
 });
@@ -78,32 +78,115 @@ app.post('/api/new/user', function(req, res) {
 
 // Fetches shopping cart NEEDs AUTH
 app.get('/api/cart/:userid', function(req, res) {
-  const { userid } = req.params;
-  res.send(`fetched cart for ${userid}`);
+  const { gitlogin, userid } = req.params;
+  dbClient.exists(userid, (err, exists) => {
+      if (err){
+        res.status(500).send(err);
+      }
+      else if(!exists){
+        res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
+      }
+      else if(exists){
+        dbClient.hgetall(userid, (err, result) => {
+          if (err) {
+            res.status(500).send(err);
+          }
+          res.status(200).json(result);
+        });
+      }
+    });
 });
 
 // Adds dev to shopping cart NEEDs AUTH
-app.post('/api/cart/add/:gitlogin/:userid', function(req, res) {
+// TODO: refactor duplicate code for add, delete, update cart
+app.post('/api/cart/add/:userid/:gitlogin', function(req, res) {
   const { gitlogin, userid } = req.params;
-  res.send(`added ${gitlogin} to ${userid}  cart`);
+  dbClient.exists(userid, (err, exists) => {
+      if (err){
+        res.status(500).send(err);
+      }
+      else if(!exists){
+        res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
+      }
+      else if(exists){
+        dbClient.hset(userid, gitlogin, 1, (err, result) => {
+          if(result === 1){
+            res.status(201).send(userid);
+          }
+        });
+      }
+    });
 });
 
 // Deletes dev on a shopping cart NEEDs AUTH
-app.delete('/api/cart/delete/:gitlogin/:userid', function(req, res) {
+app.delete('/api/cart/delete/:userid/:gitlogin', function(req, res) {
   const { gitlogin, userid } = req.params;
-  res.send(`deleted ${gitlogin} from ${userid} cart`);
+  dbClient.exists(userid, (err, exists) => {
+      if (err){
+        res.status(500).send(err);
+      }
+      else if(!exists){
+        res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
+      }
+      else if(exists){
+        dbClient.hdel(userid, gitlogin, (err, result) => {
+          if(result === 1){
+            res.status(200).send(gitlogin);
+          }
+        });
+      }
+    });
 });
 
 // Updates hours of a user in a shopping cart NEEDs AUTH
-app.put('/api/cart/edit/hours/:gitlogin/:hours/:userid', function(req, res) {
+app.put('/api/cart/edit/hours/:userid/:gitlogin/:hours', function(req, res) {
   const { gitlogin, hours, userid } = req.params;
-  res.send(`updated  ${gitlogin} hours to ${hours} on ${userid} cart`);
+  dbClient.exists(userid, (err, exists) => {
+      if (err){
+        res.status(500).send(err);
+      }
+      else if(!exists){
+        res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
+      }
+      else if(exists){
+        dbClient.hset(userid, gitlogin, hours, (err, result) => {
+          if(err){
+            res.status(500).send(err);
+          }
+          res.status(200).send(hours);
+        });
+      }
+    });
 });
 
 // Applies coupon to a shopping cart NEEDs AUTH
 app.post('/api/cart/apply/coupon/:code/:userid', function(req, res) {
   const { code, userid } = req.params;
-  res.send(`applied coupon ${code} to ${userid}`);
+  if ( !(code in promocodes) ) {
+    res.status(200).json({success: false, message: "This code is not valid"})
+  }
+
+  dbClient.exists(userid, (err, exists) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+      else if(!exists) {
+        res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
+      }
+      else if(exists){
+        const codeData = promocodes[code]
+        let updates = { discount: codeData.amount };
+        updates[codeData.key] = true;
+        dbClient.hmset(userid, updates, (err, result) => {
+          if(err) {
+            res.status(500).send(err);
+          }
+          else {
+            res.status(200).send( {success: true, discount: codeData.amount} );
+          }
+        });
+      }
+    });
 });
 
 

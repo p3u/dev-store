@@ -29,3 +29,7 @@ export function fetchSingleDeveloper(login){
     payload: request
   }
 }
+
+export function addToCart(login, userid){
+  const request = axios.post(`${BASE_URL}/cart/add/${userid}/${login}`);
+}
