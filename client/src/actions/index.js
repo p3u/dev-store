@@ -5,6 +5,8 @@ export const SET_CURRENT_ORGANIZATION = 'SET_CURRENT_ORGANIZATION';
 export const FETCH_SINGLE_DEVELOPER = 'FETCH_SINGLE_DEVELOPER';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const FETCH_CART = 'FETCH_CART';
+
 
 const BASE_URL  = `http://${window.location.hostname}:5000/api`
 
@@ -17,14 +19,14 @@ export function fetchDevelopers(organization, pagination=0) {
   };
 }
 
-export function setCurrentOrg(organization){
+export function setCurrentOrg(organization) {
   return {
     type: SET_CURRENT_ORGANIZATION,
     payload: organization
   }
 }
 
-export function fetchSingleDeveloper(login){
+export function fetchSingleDeveloper(login) {
   const request = axios.get(`${BASE_URL}/dev/${login}`);
   return {
     type: FETCH_SINGLE_DEVELOPER,
@@ -32,20 +34,27 @@ export function fetchSingleDeveloper(login){
   }
 }
 
-export function addToCart(login, userid){
+export function addToCart(login, userid) {
   const request = axios.post(`${BASE_URL}/cart/add/${userid}/${login}`);
-  debugger
   return {
     type: ADD_TO_CART,
     payload: request
   }
 }
 
-export function removeFromCart(login, userid){
+export function removeFromCart(login, userid) {
   const request = axios.delete(`${BASE_URL}/cart/delete/${userid}/${login}`);
-  debugger
   return {
     type: REMOVE_FROM_CART,
+    payload: request
+  }
+}
+
+export function fetchCart(userid) {
+  debugger
+  const request = axios.get(`${BASE_URL}/cart/${userid}`);
+  return {
+    type: FETCH_CART,
     payload: request
   }
 }

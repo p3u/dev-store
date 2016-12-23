@@ -89,9 +89,9 @@ app.get('/api/cart/:userid', function(req, res) {
       else if(exists){
         dbClient.hgetall(userid, (err, result) => {
           if (err) {
-            res.status(500).send(err);
+            res.status(500).json({success: false, error: err});
           }
-          res.status(200).json(result);
+          res.status(200).json({success: true, cart: result});
         });
       }
     });
