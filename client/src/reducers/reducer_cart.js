@@ -16,7 +16,11 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
     switch (action.type) {
     case ADD_TO_CART :
       const developer = action.payload.data.developer;
-      return { developers: Object.assign({}, developer, state.developers),
+      const deveId = Object.keys(developer)[0];
+      let cleanDeveloper = {}
+      cleanDeveloper[deveId] = {id: developerId, hours: developer[deveId]}
+
+      return { developers: Object.assign({}, cleanDeveloper, state.developers),
                discount: state.discount,
                loading: false };
 

@@ -7,6 +7,7 @@ import { fetchSingleDeveloper } from '../actions/index';
 class CheckoutList extends Component {
 
   componentWillMount() {
+    debugger
     // For each fetched developers (whole app), check if this developer is in
     // the cart.
     // O(n) vs O(kn) if I did the other way around.
@@ -15,7 +16,7 @@ class CheckoutList extends Component {
     let fetchedDevelopers = this.props.fetchedDevelopers;
     fetchedDevelopers.forEach((dev) => {
       if (dev.id in developersInCart) {
-        developersInCart[dev.id].extraInfoFetched = true;
+        developersInCart[dev.id] = {extraInfoFetched: true};
       }
     })
 

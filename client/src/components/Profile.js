@@ -46,7 +46,7 @@ class Profile extends Component {
     console.log(dev)
 
     return (
-    <section class="cf w-100 pa2-ns">
+    <section className="cf w-100 pa2-ns">
       <div className="basic-info cf ph2-ns ">
         <AddCartButton devId={dev.id} />
         <div className="avatar fl w-100 w-25-m w-25-ns h5-ns pa2 db cb ">
