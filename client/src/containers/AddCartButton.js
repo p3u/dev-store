@@ -38,13 +38,15 @@ class AddCartButton extends Component {
     let color = 'green';
     if(this.props.devId in this.props.cart.developers){
       btnFunction = this.removeCart;
-      btnText = 'Remove from cart';
+      btnText = 'Remove';
       color = 'red';
     }
 
+    let cartIcon = this.props.removeIcon ? '' : <i className="fa fa-shopping-cart white" aria-hidden="true" />
+
     return (
       <button onClick={(e) => btnFunction.bind(this)(e)} className={`no-underline near-white bg-animate bg-light-${color} hover-bg-${color} pointer inline-flex items-center ma2 tc br2 pa2 fr db cb`} href="https://facebook.com" title="Facebook">
-          <i className="fa fa-shopping-cart white" aria-hidden="true" />
+          {cartIcon}
           <span className="f6 ml3 pr2">{btnText}</span>
       </button>
     );

@@ -17,7 +17,7 @@ class DevHoursInput extends Component {
   // Debouncing hours updates
   updateDevHours = _.debounce(
     this.props.updateDevHours,
-    500
+    350
   )
 
 
@@ -36,7 +36,7 @@ class DevHoursInput extends Component {
     const isSynchedWithServer = this.state.hours === this.props.hours;
     const color = isSynchedWithServer ? 'black' : 'light-blue'
     return (
-      <input onChange={ (e) => this.onInputChange(e) } className={"f6 w3 " + color} type="number" name="quantity" min="1" value={this.state.hours}/>
+      <input onChange={ (e) => this.onInputChange(e) } className={"f6 w2-5 " + color} type="number" name="quantity" min="1" max="99" value={this.state.hours}/>
     );
   }
 }

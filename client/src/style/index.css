@@ -16,6 +16,10 @@ body {
  word-wrap: break-word
 }
 
+.w2-5 {
+  width: 3em;
+}
+
 @media screen and (min-width: 30em) {
    .wh3-5-ns {
      width: 6em;
