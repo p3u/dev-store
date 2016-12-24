@@ -1,5 +1,6 @@
 import React from 'react';
 import AddCartButton from '../containers/AddCartButton';
+import DevHoursInput from '../containers/DevHoursInput';
 
 export default function checkOutItem(props){
     return (
@@ -10,7 +11,7 @@ export default function checkOutItem(props){
           <span className="f6 db black-70">{props.itemInfo.org}</span>
         </div>
         <div className="pl5">
-          <input className="f6 w3" type="number" name="quantity" min="0" value={props.itemInfo.hours}/>
+          <DevHoursInput devId={props.itemInfo.id} />
         </div>
         <div className="pl3">
           <span className="f6 db black-70">{props.itemInfo.wage}/h</span>

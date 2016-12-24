@@ -29,7 +29,6 @@ class CheckoutList extends Component {
   }
 
   render() {
-    debugger
     let renderedDevs = Object.assign({}, this.props.developersInCart);
     this.props.fetchedDevelopers.forEach((dev) => {
       if(dev.id in renderedDevs) {

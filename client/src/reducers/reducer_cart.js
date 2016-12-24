@@ -1,20 +1,26 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, FETCH_CART } from '../actions/index';
+import { ADD_TO_CART, REMOVE_FROM_CART, FETCH_CART, UPDATE_DEV_HOURS } from '../actions/index';
 
 export default function(state = {developers: {}, discount: 0, loading: true}, action) {
-    switch (action.type) {
-    case ADD_TO_CART :
-      if( !action.payload.data.success ) {
+    if(action.payload && action.payload.response) {
+      if( action.payload.response.status === 500 ||  action.payload.response.status === 403) {
+        console.log(action.payload.response)
         return state;
       }
+
+      if( !action.payload.data.success ) {
+        console.log(action.payload.data.error)
+        return state;
+      }
+    }
+
+    switch (action.type) {
+    case ADD_TO_CART :
       const developer = action.payload.data.developer;
       return { developers: Object.assign({}, developer, state.developers),
                discount: state.discount,
                loading: false };
 
     case REMOVE_FROM_CART:
-      if( !action.payload.data.success ) {
-        return state;
-      }
       const developerId = action.payload.data.devId;
       let newDevelopers = Object.assign({}, state.developers);
       delete newDevelopers[developerId];
@@ -23,9 +29,6 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
                loading: false };
 
     case FETCH_CART:
-      if( !action.payload.data.success ) {
-        return state;
-      }
       const discount = action.payload.data.cart.discount;
       let developers = action.payload.data.cart;
       delete developers.discount;
@@ -38,6 +41,14 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
       return { developers: cleanedDevelopers,
                discount: discount,
                loading: false };
+
+    case UPDATE_DEV_HOURS:
+      const { devId, hours } = action.payload.data;
+      let updatedDevelopers = Object.assign( {}, state.developers );
+      updatedDevelopers[devId].hours = hours;
+      return { developers: updatedDevelopers,
+              discount: state.Discount,
+              loading: false };
 
     default:
       return state;

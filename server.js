@@ -128,7 +128,7 @@ app.delete('/api/cart/delete/:userid/:gitlogin', function(req, res) {
   const { gitlogin, userid } = req.params;
   dbClient.exists(userid, (err, exists) => {
       if (err){
-        res.status(500).send(err);
+        res.status(500).json( {success: false, error: err} )
       }
       else if(!exists){
         res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
@@ -151,7 +151,7 @@ app.put('/api/cart/edit/hours/:userid/:gitlogin/:hours', function(req, res) {
   const { gitlogin, hours, userid } = req.params;
   dbClient.exists(userid, (err, exists) => {
       if (err){
-        res.status(500).send(err);
+        res.status(500).json( {success: false, error: err} )
       }
       else if(!exists){
         res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
@@ -159,9 +159,9 @@ app.put('/api/cart/edit/hours/:userid/:gitlogin/:hours', function(req, res) {
       else if(exists){
         dbClient.hset(userid, gitlogin, hours, (err, result) => {
           if(err){
-            res.status(500).send(err);
+            res.status(500).json( {success: false, error: err} )
           }
-          res.status(200).send(hours);
+          res.status(200).json( {success: true, hours: hours, devId: gitlogin} )
         });
       }
     });
