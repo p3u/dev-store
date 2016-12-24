@@ -1,12 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-function calculateDevPrice(devData) {
-  return Math.round(Math.random()*1000)
-}
-
 export default function Card({devInfo}) {
-  const devWage = calculateDevPrice(devInfo);
   return (
     <Link to={`/profile/${devInfo.id}`} className="card-link gray">
       <article className="dev-card mw5 br3 pb3 ph4 ma3 ba b--black-10 dib">
@@ -40,7 +35,7 @@ export default function Card({devInfo}) {
             {devInfo.bio}
             </p>
           </div>
-          <p className="mb5 green dev-wage">R$ {devWage}/h</p>
+          <p className="mb5 green dev-wage">R$ {devInfo.wage}/h</p>
         </div>
       </article>
     </Link>

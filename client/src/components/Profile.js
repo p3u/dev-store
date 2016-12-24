@@ -62,7 +62,7 @@ class Profile extends Component {
             <p>{dev.email}</p>
             <a href={dev.website}>{dev.website}</a>
             <p>{dev.location}</p>
-            <p>R$ 150</p>
+            <p>R$ {dev.wage}</p>
             <div className="profile-bio cf ph2-ns pa2 ">
               <article>{dev.bio}</article>
             </div>
