@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchSingleDeveloper } from '../actions/index';
 import LanguagesPanel from './LanguagesPanel';
@@ -51,7 +50,7 @@ class Profile extends Component {
         <AddCartButton devId={dev.id} />
         <div className="avatar fl w-100 w-25-m w-25-ns h5-ns pa2 db cb ">
           <img className="profile-img w-100 h5-ns h4-m" src={dev.avatarUrl}
-                                             title="Avatar" />
+                                             alt="Avatar" />
         </div>
         <div className="contact-info fl w-25-m w-100 w-25-ns h5-ns pa2 ">
           <div className="ph3 white pv2 bb b--light-silver bg-black-70">

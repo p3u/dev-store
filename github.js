@@ -7,7 +7,6 @@ const config = { headers: { 'Authorization': `bearer ${GH_TOKEN}`,
                };
 
 function query(queryName, term, confirmationSearch=false, endCursor) {
-  console.log(endCursor)
   // If no confirmationSearch needed, just do the search
   if(!confirmationSearch) {
     return axios.post(url, queryName(term, endCursor), config);

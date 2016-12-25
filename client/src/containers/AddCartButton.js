@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addToCart, removeFromCart } from '../actions/index';
 import Cookies from 'cookies-js';
-import axios from 'axios';
 
 class AddCartButton extends Component {
 

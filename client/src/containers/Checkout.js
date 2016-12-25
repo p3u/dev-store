@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import CheckoutList from './CheckoutList'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { fetchSingleDeveloper } from '../actions/index';
 
 
 class Checkout extends Component {

@@ -17,7 +17,7 @@ class Catalog extends Component {
   filterByOrg = function(devs, filteredOrg) {
     return devs.filter( (dev) => {
       // Lower case without spaces
-      filteredOrg = filteredOrg.toLowerCase().replace(/\s/g,'')
+      filteredOrg = filteredOrg ? filteredOrg.toLowerCase().replace(/\s/g,'') : undefined
       const orgLogins = dev.organizations.map((org) => {
         return org.login.toLowerCase().replace(/\s/g,'');
       });

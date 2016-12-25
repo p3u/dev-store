@@ -13,21 +13,22 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
       }
     }
 
+    let devId = undefined;
     switch (action.type) {
     case ADD_TO_CART :
       const developer = action.payload.data.developer;
-      const deveId = Object.keys(developer)[0];
+      devId = Object.keys(developer)[0];
       let cleanDeveloper = {}
-      cleanDeveloper[deveId] = {id: developerId, hours: developer[deveId]}
+      cleanDeveloper[devId] = {id: devId, hours: developer[devId]}
 
       return { developers: Object.assign({}, cleanDeveloper, state.developers),
                discount: state.discount,
                loading: false };
 
     case REMOVE_FROM_CART:
-      const developerId = action.payload.data.devId;
+      devId = action.payload.data.devId;
       let newDevelopers = Object.assign({}, state.developers);
-      delete newDevelopers[developerId];
+      delete newDevelopers[devId];
       return { developers: newDevelopers,
                discount: state.discount,
                loading: false };
@@ -47,7 +48,8 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
                loading: false };
 
     case UPDATE_DEV_HOURS:
-      const { devId, hours } = action.payload.data;
+      const hours = action.payload.data.hours;
+      devId = action.payload.data.devId;
       let updatedDevelopers = Object.assign( {}, state.developers );
       updatedDevelopers[devId].hours = hours;
       return { developers: updatedDevelopers,
