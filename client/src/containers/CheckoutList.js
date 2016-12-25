@@ -7,7 +7,6 @@ import { fetchSingleDeveloper } from '../actions/index';
 class CheckoutList extends Component {
 
   componentWillMount() {
-    debugger
     // For each fetched developers (whole app), check if this developer is in
     // the cart.
     // O(n) vs O(kn) if I did the other way around.

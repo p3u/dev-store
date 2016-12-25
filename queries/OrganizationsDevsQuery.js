@@ -1,10 +1,15 @@
-export default function organizationsDevsQuery(organization){
+export default function organizationsDevsQuery(organization, endCursor) {
+  const paginationArgument = (endCursor !== '0') ? `, after: \\"${endCursor}\\"` : '';
   const BaseQuery =
   `{"query": "query {
       organization(login: \\"${organization}\\") {
         login
-        members(first: 8) {
+        members(first: 8${paginationArgument}) {
           totalCount
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
           edges {
             cursor
             node {

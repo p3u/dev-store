@@ -21,6 +21,16 @@ Priorize a lista de tarefas abaixo explicando os motivos da priorização de cad
 * Transforme a aplicação em um Progressive Web App. (Também seria legal ter o site em Progressive Web App... mas não sei estimar quanto tempo demora, prefiro deixar para depois)
 * Faça sua API ser GraphQL (Nem daria tanto trabalho, mas considerando que a API é basica (poucas URIs) acho besteira implementar. Aumentaria a complexidade do projeto com mais uma tecnologia, e sinceramente não vejo tanto valor para esse projeto. Pode ser feito depois de qualquer maneira).
 
+CSS
+Loadings
+Cache
+Herouku
+Paginacao
+Finalizar compra
+cupom
+
+Eliminar Todos
+
 ## Server side
 
 Crie uma API em Node que, no mínimo, utilize uma lista em memória para guardar o estado do carrinho.

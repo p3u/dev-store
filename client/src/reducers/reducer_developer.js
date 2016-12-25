@@ -4,7 +4,7 @@ import extractLanguages from '../helpers/extractLanguages';
 import extractRepos from '../helpers/extractRepos';
 
 
-function cleanDevelopersData(response){
+function cleanDevelopersData(response) {
   let developers = [];
 
   // When fetching developers from an organization
@@ -52,10 +52,10 @@ function cleanDevelopersData(response){
 export default function(state = [], action) {
     switch (action.type) {
     case FETCH_DEVELOPERS:
-      return cleanDevelopersData(action.payload.data).concat(state);
+      return state.concat(cleanDevelopersData(action.payload.data));
 
     case FETCH_SINGLE_DEVELOPER:
-      return cleanDevelopersData(action.payload.data).concat(state);
+      return state.concat(cleanDevelopersData(action.payload.data));
 
     default:
       return state;

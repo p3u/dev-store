@@ -5,7 +5,6 @@ import { Link } from 'react-router';
 
 export default function checkOutItem(props){
 
-    debugger
     if(props.itemInfo.name === undefined) {
       return <p> Loading... </p>
     }

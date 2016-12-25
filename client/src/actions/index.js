@@ -11,9 +11,9 @@ export const UPDATE_DEV_HOURS = 'UPDATE_DEV_HOURS';
 
 const BASE_URL  = `http://${window.location.hostname}:5000/api`
 
-export function fetchDevelopers(organization, pagination=0) {
+export function fetchDevelopers(organization, endCursor=0) {
   // request is a promise!
-  const request = axios.get(`${BASE_URL}/devs/${organization}/${pagination}`);
+  const request = axios.get(`${BASE_URL}/devs/${organization}/${endCursor}`);
   return {
     type: FETCH_DEVELOPERS,
     payload: request

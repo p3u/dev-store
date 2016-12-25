@@ -47,9 +47,10 @@ app.get('/api/dev/:gitlogin', function(req, res) {
 });
 
 // Fetches 8 devs from an organizaiton
-app.get('/api/devs/:organization/:pagination', function(req, res) {
-  const { organization, pagination } = req.params;
-  gh.query(organizationsDevsQuery, organization, true)
+app.get('/api/devs/:organization/:endcursor', function(req, res) {
+  const { organization, endcursor } = req.params;
+  console.log(endcursor)
+  gh.query(organizationsDevsQuery, organization, true, endcursor)
   .then(
     (response) => {
       res.status(response.status).json(response.data);

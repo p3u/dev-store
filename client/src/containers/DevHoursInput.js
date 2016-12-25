@@ -32,7 +32,6 @@ class DevHoursInput extends Component {
   }
 
   render() {
-    debugger
     const isSynchedWithServer = this.state.hours === this.props.hours;
     const color = isSynchedWithServer ? 'black' : 'light-blue'
     return (
