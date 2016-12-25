@@ -22,6 +22,7 @@ export default function organizationsDevsQuery(organization){
                 edges {
                   node {
                     avatarURL
+                    login
                     name
                   }
                 }

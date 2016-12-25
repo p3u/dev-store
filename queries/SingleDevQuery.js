@@ -16,6 +16,7 @@ export default function singleDevQuery(login){
           edges {
             node {
               avatarURL
+              login
               name
             }
           }

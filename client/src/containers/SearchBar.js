@@ -27,6 +27,7 @@ class SearchBar extends Component {
       this.props.setCurrentOrg(term);
     }
     else {
+      this.props.setCurrentOrg(term);
       this.props.fetchDevelopers(term);
     }
 

@@ -29,7 +29,7 @@ function cleanDevelopersData(response){
     const nFollowers = dev.followers.totalCount;
     const nRepos = dev.repositories.totalCount;
     const wage = pricer( nRepos, languages.length, nFollowers, nStars);
-
+    console.log(dev.organizations.edges.map(( {node : org} ) => org))
     return {
       name: dev.name,
       location: dev.location,
