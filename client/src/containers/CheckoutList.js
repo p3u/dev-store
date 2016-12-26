@@ -11,8 +11,9 @@ class CheckoutList extends Component {
     // the cart.
     // O(n) vs O(kn) if I did the other way around.
     // Could be reduced roughly to O(1) if I used a object to store fetchedDevelopers
-    let developersInCart = Object.assign({}, this.props.developersInCart);
-    let fetchedDevelopers = this.props.fetchedDevelopers;
+    // The JSON parse stringfy was the way I found to do a deep copy
+    let developersInCart = JSON.parse(JSON.stringify(this.props.developersInCart))
+    let fetchedDevelopers = this.props.fetchedDevelopers.slice();
     fetchedDevelopers.forEach((dev) => {
       if (dev.id in developersInCart) {
         developersInCart[dev.id] = {extraInfoFetched: true};
@@ -29,8 +30,13 @@ class CheckoutList extends Component {
   }
 
   render() {
-    let renderedDevs = Object.assign({}, this.props.developersInCart);
-    this.props.fetchedDevelopers.forEach((dev) => {
+    // Grab all devs that will be rendered
+    let renderedDevs = JSON.parse(JSON.stringify(this.props.developersInCart))
+
+    // for each dev that was fetched by the app (all devs)
+    // if the dev is in the cart, add grabbed info to the renderedDev
+    let fetchedDevelopers = this.props.fetchedDevelopers.slice();
+    fetchedDevelopers.forEach((dev) => {
       if(dev.id in renderedDevs) {
         Object.assign(renderedDevs[dev.id], dev);
       }
