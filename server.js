@@ -7,20 +7,29 @@ import organizationsDevsQuery from './queries/OrganizationsDevsQuery';
 import { gh } from './github';
 import uuidV4 from 'uuid/v4';
 import { promocodes } from './promocodes';
+import cacheSetup from 'express-redis-cache';
 
 const app = express();
 
-// DB Setup
+///////////////////////////////// Redis setup /////////////////////////////////
 let dbClient = redis.createClient(16329, "redis-16329.c10.us-east-1-4.ec2.cloud.redislabs.com");
 dbClient.auth(DB_TOKEN);
 
-// if an error occurs, print it to the console
+// if an error occurs on redis, print it to the console
 dbClient.on('error', function (err) {
     console.log("Error " + err);
 });
 
-app.set('port', (process.env.PORT || 5000));
+// Setting up caching on the server
+const ONE_DAY_IN_SECS = 86400;
+const cache = cacheSetup({ client: dbClient,
+                           prefix: 'cache',
+                           expire: ONE_DAY_IN_SECS });
 
+
+//////////////////////////////// Express setup ////////////////////////////////
+app.set('port', (process.env.PORT || 5000));
+app.set('etag', false);
 
 //CORS middleware
 const allowCrossDomain = function(req, res, next) {
@@ -30,11 +39,25 @@ const allowCrossDomain = function(req, res, next) {
     next();
 }
 
+const cacheOnClient = function(req, res, next) {
+  if (req.url.substring(0, 8) === '/api/dev' ) {
+    res.header('Cache-Control', `public, max-age=${ONE_DAY_IN_SECS * 1000}`);
+    res.setHeader('Expires', new Date(Date.now() + (ONE_DAY_IN_SECS * 1000) ).toUTCString());
+  }
+  next();
+}
+
 //Applying middlewares
 app.use(allowCrossDomain);
+app.use(cacheOnClient);
 
-//  Fetches a single dev
-app.get('/api/dev/:gitlogin', function(req, res) {
+
+
+
+///////////////////////////////////// API /////////////////////////////////////
+
+// Fetches a single dev
+app.get('/api/dev/:gitlogin', cache.route(), function(req, res) {
   const { gitlogin }  = req.params;
   gh.query(singleDevQuery, gitlogin, false).then(
     function(response) {
@@ -47,7 +70,7 @@ app.get('/api/dev/:gitlogin', function(req, res) {
 });
 
 // Fetches 8 devs from an organizaiton
-app.get('/api/devs/:organization/:endcursor', function(req, res) {
+app.get('/api/devs/:organization/:endcursor', cache.route(), function(req, res) {
   const { organization, endcursor } = req.params;
   gh.query(organizationsDevsQuery, organization, true, endcursor)
   .then(
@@ -84,7 +107,8 @@ app.get('/api/cart/:userid', function(req, res) {
         res.status(500).send(err);
       }
       else if(!exists){
-        res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
+        res.status(403).cookie('userid', uuidV4())
+                       .send("User doesn't exist. New cookie installed");
       }
       else if(exists){
         dbClient.hgetall(userid, (err, result) => {
@@ -106,7 +130,8 @@ app.post('/api/cart/add/:userid/:gitlogin', function(req, res) {
         res.status(500).send(err);
       }
       else if(!exists){
-        res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
+        res.status(403).cookie('userid', uuidV4())
+                       .send("User doesn't exist. New cookie installed");
       }
       else if(exists){
         dbClient.hset(userid, gitlogin, 1, (err, result) => {
@@ -131,7 +156,8 @@ app.delete('/api/cart/delete/:userid/:gitlogin', function(req, res) {
         res.status(500).json( {success: false, error: err} )
       }
       else if(!exists){
-        res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
+        res.status(403).cookie('userid', uuidV4())
+                       .send("User doesn't exist. New cookie installed");
       }
       else if(exists){
         dbClient.hdel(userid, gitlogin, (err, result) => {
@@ -154,7 +180,8 @@ app.put('/api/cart/edit/hours/:userid/:gitlogin/:hours', function(req, res) {
         res.status(500).json( {success: false, error: err} )
       }
       else if(!exists){
-        res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
+        res.status(403).cookie('userid', uuidV4())
+                       .send("User doesn't exist. New cookie installed");
       }
       else if(exists){
         dbClient.hset(userid, gitlogin, hours, (err, result) => {
@@ -180,7 +207,8 @@ app.post('/api/cart/apply/coupon/:code/:userid', function(req, res) {
         res.status(500).send(err);
       }
       else if(!exists) {
-        res.status(403).cookie('userid', uuidV4()).send("User doesn't exist. New cookie installed");
+        res.status(403).cookie('userid', uuidV4())
+                       .send("User doesn't exist. New cookie installed");
       }
       else if(exists){
         const codeData = promocodes[code]
