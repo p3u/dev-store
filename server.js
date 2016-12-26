@@ -26,6 +26,9 @@ const cache = cacheSetup({ client: dbClient,
                            prefix: 'cache',
                            expire: ONE_DAY_IN_SECS });
 
+cache.on('error', function (err) {
+    console.log("Error " + err);
+});
 
 //////////////////////////////// Express setup ////////////////////////////////
 app.set('port', (process.env.PORT || 5000));
