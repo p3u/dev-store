@@ -36,7 +36,7 @@ class Catalog extends Component {
 
     else {
       return (
-        <section className="cf w-100 pa2-ns mw5 mw7-ns center pa3 ph5-ns">
+        <section className="cf w-100 pa2-ns mw5 mw7-ns center tc pa3 ph5-ns">
           <button onClick={(e) => this.handleClick(e)}className="m0 f6 dim br3 ba bw2 ph3 pv2 mb2 dib dark-blue lh-copy measure" href="#0">Load More</button>
         </section>
       );
@@ -50,7 +50,7 @@ class Catalog extends Component {
 
     return (
       <div className="center">
-        <section className="cf w-100 pa2-ns">
+        <section className="cf w-100 pa2-ns tc">
           {filteredDevelopers.map(dev => <Card key={dev.id} devInfo={dev}/>)}
         </section>
         {this.renderLoadMoreButton()}

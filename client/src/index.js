@@ -9,6 +9,8 @@ import reducers from './reducers';
 import routes from './routes';
 
 import './style/index.css';
+import './style/vtex-style.css';
+
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 

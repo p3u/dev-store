@@ -6,6 +6,7 @@ import ReposPanel from './ReposPanel';
 import OrganizationsPanel from './OrganizationsPanel';
 import StatsPanel from './StatsPanel';
 import AddCartButton from '../containers/AddCartButton';
+import ContactInfo from './ContactInfo';
 
 class Profile extends Component {
   constructor(props) {
@@ -49,23 +50,11 @@ class Profile extends Component {
       <div className="basic-info cf ph2-ns ">
         <AddCartButton devId={dev.id} />
         <div className="avatar fl w-100 w-25-m w-25-ns h5-ns pa2 db cb ">
-          <img className="profile-img w-100 h5-ns h4-m" src={dev.avatarUrl}
+          <img className="profile-img w-100 br3 h5-ns h4-m" src={dev.avatarUrl}
                                              alt="Avatar" />
         </div>
-        <div className="contact-info fl w-25-m w-100 w-25-ns h5-ns pa2 ">
-          <div className="ph3 white pv2 bb b--light-silver bg-black-70">
-             Contact Info
-          </div>
-          <div className="h5-ns h4-m">
-            <p>{dev.name}</p>
-            <p>{dev.email}</p>
-            <a href={dev.website}>{dev.website}</a>
-            <p>{dev.location}</p>
-            <p>R$ {dev.wage}</p>
-            <div className="profile-bio cf ph2-ns pa2 ">
-              <article>{dev.bio}</article>
-            </div>
-          </div>
+        <div className="contact-info fl w-25-m w-100 w-25-ns h5-ns pa2 bg-white ">
+          <ContactInfo dev={dev}/>
         </div>
         <div className="organizations fl w-50-m w-100 w-50-ns pa2 ">
           <OrganizationsPanel organizations={dev.organizations.slice(0,3)}

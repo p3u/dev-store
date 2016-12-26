@@ -1,0 +1,41 @@
+/**
+*** @name:    sufixo da classe
+*** @i:       indice do sufixo
+*** ...       lista de 3 cores
+***
+*** Exemplo: .swatch(vtex; 1; @cor1; @cor2; @cor3);
+*** Resultado:
+*** &.swatch-vtex-1 { background-color: #111; }
+*** &.swatch-vtex-2 { background-color: #222; }
+*** &.swatch-vtex-3 { background-color: #333; }
+**/
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.lead {
+  font-family: "jaf-bernino-sans-condensed", "Arial Narrow", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.lead {
+  color: #5c6f7f;
+}
+
+body {
+  background-color: #f4f7fa;
+  color: #5c6f7f;
+  font-family: "ff-dagny-web-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

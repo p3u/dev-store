@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 function renderOrgTile(org, key) {
   return (
-    <div key={key} className="org-card fl w-100 w-third-ns pa2 tc bl br h-100">
+    <div key={key} className="org-card fl w-100 w-third-ns pa2 tc  h-100 ba b--dotted b--light-silver">
       <img className="h4-l wh3-5-m h2" src={org.avatarURL} alt="Organization Logo" />
       <p className="hyphenate dn db-l">{org.name}</p>
     </div>
@@ -15,7 +15,7 @@ function renderOrgTile(org, key) {
 
 function renderOrgRow(orgs, key) {
    return (
-        <div key={key} className="organizations-row cf ba h-100">
+        <div key={key} className="organizations-row cf h-100 bg-white ">
           { orgs.map( (org, idx) => renderOrgTile(org, idx) )  }
         </div>
    );

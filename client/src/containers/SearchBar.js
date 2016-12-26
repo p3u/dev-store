@@ -37,8 +37,8 @@ class SearchBar extends Component {
   render(){
     return (
       <div className="pa3-l">
-        <form onSubmit={(e) => this.onFormSubmit(e)} className="mw7 center pa4 br2-ns ba b--black-20">
-          <fieldset className="cf bn ma0 pa0">
+        <form onSubmit={(e) => this.onFormSubmit(e)} className="center w-100 w-75-ns br2-ns">
+          <fieldset className="cf w-100 bn ma0 pa0">
             <legend className="pa0 f5 f4-ns mb3 black-80">Search for Developers in any Organization</legend>
             <div className="cf">
               <input onChange={(e) => this.onInputChange(e)} value={this.state.term} className="f6 f5-l input-reset ba b--black-10 fl black-80 pa3 w-100 w-75-m w-80-l br2-ns br--left-ns" placeholder="Mozilla Foundation" type="text" name="Org_Search" />

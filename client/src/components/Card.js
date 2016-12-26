@@ -1,10 +1,11 @@
 import React from 'react';
+import '../style/Card.css';
 import { Link } from 'react-router';
 
 export default function Card({devInfo}) {
   return (
     <Link to={`/profile/${devInfo.id}`} className="card-link gray">
-      <article className="dev-card mw5 br3 pb3 ph4 ma3 ba b--black-10 dib">
+      <article className="dev-card border-box br3 pa1 mv2-ns mv1 mh2-l mh1-m mh0 w-20-l w-30-m w-100 ba b--black-10 dib">
         <div className="tc">
           <nav className="center">
             <div className="nowrap">

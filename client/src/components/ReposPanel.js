@@ -7,7 +7,7 @@ import _ from 'lodash';
 function renderRepoTile(repo, idx) {
   console.log(repo)
   return (
-    <div key={idx} className="repo-card overflow-y-auto fl w-100 h-100 w-third-ns pa2 ba b--light-silver">
+    <div key={idx} className="repo-card overflow-y-auto bg-white fl w-100 h-100 w-third-ns pa2 ba b--dotted b--light-silver">
       <h4 className="dib hyphenate mv3">{repo.name}</h4>
       <div className="dib fr mv3 mr1">
         <i className="fa fa-star gray" aria-hidden="true" />
