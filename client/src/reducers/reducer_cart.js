@@ -53,7 +53,7 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
       let updatedDevelopers = Object.assign( {}, state.developers );
       updatedDevelopers[devId].hours = hours;
       return { developers: updatedDevelopers,
-              discount: state.Discount,
+              discount: state.discount,
               loading: false };
 
     default:

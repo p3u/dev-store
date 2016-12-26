@@ -13,17 +13,23 @@ class Checkout extends Component {
       return developersLoginInCart.includes(devInfo.id)
     })
 
-    return developersInCartInfo.reduce((total, devInfo) =>{
+    const subtotal = developersInCartInfo.reduce((total, devInfo) =>{
       const hours = Number(developersInCart[devInfo.id].hours);
       const wage = devInfo.wage;
       return total + (wage * hours)
-    }, 0)
+    }, 0);
+
+    const discount = subtotal * Number(this.props.cart.discount);
+    const total = subtotal - discount;
+    return [subtotal, discount, total];
   }
 
   render(){
     if ( this.props.cart.loading ) {
       return <p>Loading...</p>
     }
+
+    const [subtotal, discount, total] = this.calculateTotal();
 
     return (
       <div className="w-100">
@@ -32,7 +38,10 @@ class Checkout extends Component {
         <CheckoutList developersInCart={this.props.cart.developers}/>
 
         {/* total */}
-        <p className="f6 black-70 fw2 tc ttu tracked center">Total: {this.calculateTotal()}</p>
+        <p className="f6 black-70 fw2 tc ttu tracked center">Subtotal: {subtotal}</p>
+        <p className="f6 black-70 fw2 tc ttu tracked center">Discount: {discount}</p>
+        <hr />
+        <p className="f6 black-70 fw2 tc ttu tracked center">Total: {total}</p>
 
         {/* next page */}
         <div className="measure center">
