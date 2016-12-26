@@ -170,8 +170,9 @@ app.put('/api/cart/edit/hours/:userid/:gitlogin/:hours', function(req, res) {
 // Applies coupon to a shopping cart NEEDs AUTH
 app.post('/api/cart/apply/coupon/:code/:userid', function(req, res) {
   const { code, userid } = req.params;
-  if ( !(code in promocodes) ) {
-    res.status(200).json({success: false, message: "This code is not valid"})
+  if ( !(promocodes.hasOwnProperty(code)) ) {
+    res.status(200).json({success: true, message: "This code is not valid", code: false})
+    return;
   }
 
   dbClient.exists(userid, (err, exists) => {
@@ -183,12 +184,12 @@ app.post('/api/cart/apply/coupon/:code/:userid', function(req, res) {
       }
       else if(exists){
         const codeData = promocodes[code]
-        dbClient.hmset(userid, 'discount_amount', codeData.amount, (err, result) => {
+        dbClient.hmset(userid, 'discount', codeData.amount, (err, result) => {
           if(err) {
-            res.status(500).send(err);
+            res.status(500).json( {success: false, error: err} );
           }
           else {
-            res.status(200).send( {success: true, discount_amount: codeData.amount} );
+            res.status(200).json( {success: true, discount: codeData.amount, code: code} );
           }
         });
       }

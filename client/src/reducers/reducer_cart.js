@@ -1,6 +1,6 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, FETCH_CART, UPDATE_DEV_HOURS } from '../actions/index';
+import { ADD_TO_CART, REMOVE_FROM_CART, FETCH_CART, UPDATE_DEV_HOURS, APPLY_COUPON } from '../actions/index';
 
-export default function(state = {developers: {}, discount: 0, loading: true}, action) {
+export default function(state = {developers: {}, discount: 0, code: null, loading: true}, action) {
     if(action.payload && action.payload.response) {
       if( action.payload.response.status === 500 ||  action.payload.response.status === 403) {
         console.log(action.payload.response)
@@ -14,6 +14,7 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
     }
 
     let devId = undefined;
+    let discount = undefined;
     switch (action.type) {
     case ADD_TO_CART :
       const developer = action.payload.data.developer;
@@ -23,6 +24,7 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
 
       return { developers: Object.assign({}, cleanDeveloper, state.developers),
                discount: state.discount,
+               code: null,
                loading: false };
 
     case REMOVE_FROM_CART:
@@ -31,10 +33,11 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
       delete newDevelopers[devId];
       return { developers: newDevelopers,
                discount: state.discount,
+               code: null,
                loading: false };
 
     case FETCH_CART:
-      const discount = action.payload.data.cart.discount;
+      discount = action.payload.data.cart.discount;
       let developers = action.payload.data.cart;
       delete developers.discount;
 
@@ -45,6 +48,7 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
 
       return { developers: cleanedDevelopers,
                discount: discount,
+               code: null,
                loading: false };
 
     case UPDATE_DEV_HOURS:
@@ -54,6 +58,16 @@ export default function(state = {developers: {}, discount: 0, loading: true}, ac
       updatedDevelopers[devId].hours = hours;
       return { developers: updatedDevelopers,
               discount: state.discount,
+              code: null,
+              loading: false };
+
+    case APPLY_COUPON:
+      const code = action.payload.data.code
+      // if code is false, don't change the discount amount, else, apply it.
+      discount = code === false ? state.discount : action.payload.data.discount;
+      return { developers: state.developers,
+              discount: discount,
+              code: code,
               loading: false };
 
     default:

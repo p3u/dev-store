@@ -7,7 +7,7 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const FETCH_CART = 'FETCH_CART';
 export const UPDATE_DEV_HOURS = 'UPDATE_DEV_HOURS';
-
+export const APPLY_COUPON = 'APPLY_COUPON';
 
 const BASE_URL  = `http://${window.location.hostname}:5000/api`
 
@@ -63,6 +63,14 @@ export function updateDevHours(login, hours, userid) {
   const request = axios.put(`${BASE_URL}/cart/edit/hours/${userid}/${login}/${hours}`);
   return {
     type: UPDATE_DEV_HOURS,
+    payload: request
+  }
+}
+
+export function applyCoupon(code, userid) {
+  const request = axios.post(`${BASE_URL}/cart/apply/coupon/${code}/${userid}`);
+  return {
+    type: APPLY_COUPON,
     payload: request
   }
 }

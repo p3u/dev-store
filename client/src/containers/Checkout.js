@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CheckoutList from './CheckoutList'
 import { connect } from 'react-redux';
+import CouponForm from './CouponForm';
 
 class Checkout extends Component {
 
@@ -40,9 +41,9 @@ class Checkout extends Component {
         {/* total */}
         <p className="f6 black-70 fw2 tc ttu tracked center">Subtotal: {subtotal}</p>
         <p className="f6 black-70 fw2 tc ttu tracked center">Discount: {discount}</p>
-        <hr />
+        <hr className="w4" />
         <p className="f6 black-70 fw2 tc ttu tracked center">Total: {total}</p>
-
+        <CouponForm />
         {/* next page */}
         <div className="measure center">
           <a href="#0" className="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba border-box fr">
