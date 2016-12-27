@@ -7,6 +7,7 @@ import OrganizationsPanel from './OrganizationsPanel';
 import StatsPanel from './StatsPanel';
 import AddCartButton from '../containers/AddCartButton';
 import ContactInfo from './ContactInfo';
+import ProfilePicturePanel from './ProfilePicturePanel';
 
 class Profile extends Component {
   constructor(props) {
@@ -38,48 +39,51 @@ class Profile extends Component {
     }
   }
 
+
+  // The panels componenets could have been absctracted into one componenets
+  // unfortunatly, I won't have time to do it :).
+  // should have done it from the start!!!
   render(){
     const dev = this.state.developer
     if (dev === undefined){
       return <p> Loading </p>
     }
-    console.log(dev)
 
     return (
-    <section className="cf w-100 pa2-ns">
-      <div className="basic-info cf ph2-ns ">
+      <section className="cf w-100 pa2-ns">
         <AddCartButton devId={dev.id} />
-        <div className="avatar fl w-100 w-25-m w-25-ns h5-ns pa2 db cb ">
-          <img className="profile-img w-100 br3 h5-ns h4-m" src={dev.avatarUrl}
-                                             alt="Avatar" />
-        </div>
-        <div className="contact-info fl w-25-m w-100 w-25-ns h5-ns pa2 bg-white ">
-          <ContactInfo dev={dev}/>
-        </div>
-        <div className="organizations fl w-50-m w-100 w-50-ns pa2 ">
-          <OrganizationsPanel organizations={dev.organizations.slice(0,3)}
-                              tilesPerRows={3} />
-        </div>
-      </div>
 
-
-      <div className="programming-info cf ph2-ns ">
-        <div className="dev-skills fl w-100 w-25-m w-25-ns pa2">
-          <div className="stats-panel w-100 fl-m mb2">
-            <StatsPanel nFollowers={dev.nFollowers}
-                        nStars={dev.nStars}
-                        nRepos={dev.nRepos} />
+        <div className="basic-info cf ph2-ns cb">
+          <div className="fl w-100 w-40-m w-25-l pa2">
+            <ProfilePicturePanel avatarUrl={dev.avatarUrl}/>
           </div>
-          <div className="programming-languages w-100">
-            <LanguagesPanel languages={dev.languages} />
+          <div className="contact-info fl w-25-m w-100 w-25-l w-60-m pa2">
+            <ContactInfo dev={dev}/>
+          </div>
+          <div className="organizations fl w-100 w-50-l pa2 ">
+            <OrganizationsPanel organizations={dev.organizations.slice(0,3)}
+                                tilesPerRows={3} />
           </div>
         </div>
-        <div className="github-repos fl w-100 w-75-m w-75-ns pa2">
-          <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
+
+
+        <div className="programming-info cf ph2-ns ">
+          <div className="dev-skills fl w-100 w-25-l pa2">
+            <div className="stats-panel w-100 pr2-m w-30-m fl-m mb2">
+              <StatsPanel nFollowers={dev.nFollowers}
+                          nStars={dev.nStars}
+                          nRepos={dev.nRepos} />
+            </div>
+            <div className="programming-languages w-70-m w-100 fr">
+              <LanguagesPanel languages={dev.languages} />
+            </div>
+          </div>
+          <div className="github-repos fl w-100 w-75-l pa2">
+            <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
   }
 }
 

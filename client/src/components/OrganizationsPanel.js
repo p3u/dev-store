@@ -1,34 +1,31 @@
 import React from 'react';
 import _ from 'lodash';
 
-// TODO: Maybe I should abstract all panels into a single component to avoid
-// duplicate code a more reusable component.
-
 function renderOrgTile(org, key) {
   return (
-    <div key={key} className="org-card fl w-100 w-third-ns pa2 tc  h-100 ba b--dotted b--light-silver">
-      <img className="h4-l wh3-5-m h2" src={org.avatarURL} alt="Organization Logo" />
-      <p className="hyphenate dn db-l">{org.name}</p>
+    <div key={key} className="org-card fl w-100 w-third-ns pa2 tc h-100 ba b--dotted b--light-silver dt bg-white">
+      <div className="dtc v-mid">
+        <img className="h4" src={org.avatarURL} alt="Organization Logo" />
+        <p className="hyphenate">{org.name}</p>
+      </div>
     </div>
   );
 }
 
 function renderOrgRow(orgs, key) {
    return (
-        <div key={key} className="organizations-row cf h-100 bg-white ">
+        <div key={key} className="organizations-row bg-white cf h5 ba b--dotted b--light-silver">
           { orgs.map( (org, idx) => renderOrgTile(org, idx) )  }
         </div>
    );
 }
 
 export default function OrganizationsPanel( {organizations: allOrgs, tilesPerRows} ){
-  console.log(allOrgs)
   const orgsRows = _.chunk(allOrgs, tilesPerRows);
-  console.log(orgsRows)
   return (
-    <div className="w-100 h5-ns h4-m">
-      <div className="ph3 white pv2 bb b--light-silver bg-black-70">
-         Organizations
+    <div className="w-100 h-100">
+      <div className="pl2 white pv2 bb b--light-silver bg-black-70">
+         <i className="fa fa-building-o" aria-hidden="true" />  Organizations
        </div>
        { orgsRows.map( (orgs, idx) => renderOrgRow(orgs, idx) )  }
     </div>
