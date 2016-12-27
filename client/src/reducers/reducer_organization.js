@@ -4,6 +4,7 @@ export default function(state = initialState, action) {
     switch (action.type) {
     case FETCH_DEVELOPERS:
       const orgData = action.payload.data.data.organization;
+      if(!orgData) return state;
       const pageInfo = orgData.members.pageInfo;
       const companyLogin = orgData.login;
 

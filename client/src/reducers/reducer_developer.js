@@ -4,8 +4,18 @@ import extractLanguages from '../helpers/extractLanguages';
 import extractRepos from '../helpers/extractRepos';
 
 
-function cleanDevelopersData(response) {
+function cleanDevelopersData(response, url) {
   let developers = [];
+
+  if(response.errors) {
+    // This is a quick hack because I won't have time to deliever a proper solution!
+    console.log('ERROR:', response.errors);
+    if(!url) return [{bio: response.errors[0], organizations: []}]
+    let parsedURL = url.split("/");
+    parsedURL.pop();
+    const orgName = parsedURL.pop()
+    return [{name: 'Sorry!', bio: response.errors[0].message, nFollowers:0, nStars:0, nRepos:0, wage:0, avatarUrl: 'http://developers.google.com/maps/documentation/static-maps/images/error-image-generic.png', id: 'error', organizations: [{login: orgName}], repos: [], languages: []}]
+  }
 
   // When fetching developers from an organization
   if ('organization' in response.data) {
@@ -29,7 +39,6 @@ function cleanDevelopersData(response) {
     const nFollowers = dev.followers.totalCount;
     const nRepos = dev.repositories.totalCount;
     const wage = pricer( nRepos, languages.length, nFollowers, nStars);
-    console.log(dev.organizations.edges.map(( {node : org} ) => org))
     return {
       name: dev.name,
       location: dev.location,
@@ -52,7 +61,8 @@ function cleanDevelopersData(response) {
 export default function(state = [], action) {
     switch (action.type) {
     case FETCH_DEVELOPERS:
-      return state.concat(cleanDevelopersData(action.payload.data));
+      const URL = action.payload.request.responseURL;
+      return state.concat(cleanDevelopersData(action.payload.data, URL));
 
     case FETCH_SINGLE_DEVELOPER:
       return state.concat(cleanDevelopersData(action.payload.data));

@@ -47,7 +47,7 @@ class Profile extends Component {
   render(){
     const dev = this.state.developer
     if (dev === undefined){
-      return <p> Loading </p>
+      return <p> Loading... </p>
     }
 
     return (

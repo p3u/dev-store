@@ -29,15 +29,15 @@ class CouponForm extends Component {
     const {code, discount} = this.props;
     if (code) {
       return  (
-        <small class="f6 black-60 db mb2 red">
-                Code {code} successfuly applied. ({discount} off!)
+        <small class="f6 black-60 db pt1 mb2">
+                Code {code} applied. ({discount*100 + "%"} off!)
         </small>
       );
     }
 
     else if (code === false) {
       return (
-        <small class="f6 black-60 db mb2 red">
+        <small className="f6 black-60 pt1 db mb2">
           This code is not valid.
         </small>
       );
@@ -50,15 +50,17 @@ class CouponForm extends Component {
 
   render(){
     return (
-      <div className="pa3-l">
-        <form onSubmit={(e) => this.onFormSubmit(e)} className="mw7 w5 center pa4 br2-ns ba b--black-20">
+      <div className="fl w-100 w-50-l">
+        <form onSubmit={(e) => this.onFormSubmit(e)} className="w5 center br2-ns">
           <fieldset className="cf bn ma0 pa0 w5">
             <div className="cf">
-              <label htmlFor="coupon-input" className="f6 b db mb2">Coupon Code <span class="normal black-60">(optional)</span></label>
-              <input onChange={(e) => this.onInputChange(e)} value={this.state.code} className="f6 f5-l input-reset ba b--black-10 fl black-80 pa3 w-100 w-60-m w-60-l br2-ns br--left-ns" type="text" name="coupon-input" />
-              <input className="f6 button-reset fl pv3 tc ba b--black-10 bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns" type="submit" value="Apply" />
+              <label htmlFor="coupon-input" className="f6 db tl ttu pt3 pb1 mb2">Coupon Code <span className="normal black-60">(optional)</span></label>
+              <input onChange={(e) => this.onInputChange(e)} value={this.state.code}
+                     className="f6 f5-l input-reset ba b--black-10 fl black-80 pa3 w-100 w-60-m w-60-l br2-ns br--left-ns" type="text" name="coupon-input" />
+              <input type="submit" value="Apply"
+                     className="f6 button-reset fl pv3 tc ba b--black-10 blue-bg bg-animate dim white pointer w-100 w-25-m w-20-l br2-ns br--right-ns"/>
             </div>
-            <div className="cf">
+            <div className="tl">
               {this.renderCuponMessage()}
             </div>
           </fieldset>

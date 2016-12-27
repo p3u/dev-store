@@ -88,7 +88,6 @@ app.get('/api/devs/:organization/:endcursor', cache.route(), function(req, res) 
 
 
 // Creates a new user-key to identify  the shopper
-// TODO: expire the cookie and the redis set
 app.post('/api/new/user', function(req, res) {
   const userid = uuidV4();
   dbClient.hset(userid, 'discount', 0, (err, result) => {

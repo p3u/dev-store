@@ -19,23 +19,49 @@ h2,
 h3,
 h4,
 h5,
-h6,
-.lead {
-  font-family: "jaf-bernino-sans-condensed", "Arial Narrow", sans-serif;
+h6 {
+  font-family: "Open Sans Condensed", "Arial Narrow", sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.lead {
-  color: #5c6f7f;
-}
 
 body {
   background-color: #f4f7fa;
   color: #5c6f7f;
-  font-family: "ff-dagny-web-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Maven Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.orange-bg {
+  background-color: #f68222;
+}
+
+.orange-text {
+  color: #f68222;
+}
+
+.orange-border {
+  border: #f68222;
+}
+
+.blue-bg {
+  background-color: #003b5e;
+}
+
+.blue-text {
+  color: #003b5e;
+}
+
+.blue-border {
+  border: #003b5e;
+}
+
+.green-bg {
+  background-color: #3aa850;
+}
+
+.green-text {
+  color: #3aa850;
+}
+
+.red-bg {
+  background-color: #f7645e;
 }

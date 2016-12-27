@@ -31,13 +31,17 @@ class Catalog extends Component {
     const organization = orgInfo.current;
     if (!organization) return '';
 
+    if (!orgInfo.paginationInfo[organization]) return '';
     const hasNextPage = orgInfo.paginationInfo[organization].hasNextPage
     if (!hasNextPage) return '';
 
     else {
       return (
         <section className="cf w-100 pa2-ns mw5 mw7-ns center tc pa3 ph5-ns">
-          <button onClick={(e) => this.handleClick(e)}className="m0 f6 dim br3 ba bw2 ph3 pv2 mb2 dib lh-copy measure tc ba b--black-10 bg-animate bg-black-70 hover-bg-black white pointer" href="#0">Load More</button>
+          <button onClick={(e) => this.handleClick(e)}
+            className="m0 f6 dim br1 ba bw2 ph3 pv2 mb2 dib lh-copy measure tc ba b--black-10 bg-animate blue-bg dim white pointer"
+            href="#0"> Load More
+        </button>
         </section>
       );
     }
@@ -48,10 +52,18 @@ class Catalog extends Component {
     const filteredDevelopers = this.filterByOrg( this.props.developers,
                                                  this.props.organization.current );
 
+    let loading = false;
+
+    // If user already searched for an org, but still no results, show loading...
+    if(this.props.organization.current &&  filteredDevelopers.length === 0) {
+      loading = true;
+    }
+
+    debugger;
     return (
       <div className="center">
         <section className="cf w-100 pa2-ns tc">
-          {filteredDevelopers.map(dev => <Card key={dev.id} devInfo={dev}/>)}
+          { loading ? 'Loading...' : filteredDevelopers.map(dev => <Card key={dev.id} devInfo={dev}/>)}
         </section>
         {this.renderLoadMoreButton()}
       </div>

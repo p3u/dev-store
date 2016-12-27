@@ -50,7 +50,7 @@ export default function Card({devInfo}) {
             </p>
             </div>
           </div>
-          <p className="mb5 green dev-wage">R$ {devInfo.wage}/h</p>
+          <p className="mb5 green-text dev-wage">R$ {devInfo.wage}/h</p>
         </div>
       </article>
     </Link>

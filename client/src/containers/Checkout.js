@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import CheckoutList from './CheckoutList'
 import CouponForm from './CouponForm';
-
+import Cookies from 'cookies-js';
 
 class Checkout extends Component {
-
+  cleanCookies() {
+    Cookies.expire('userid')
+  }
   calculateTotal() {
     const developersInCart = this.props.cart.developers;
     const developersLoginInCart = Object.keys(developersInCart);
@@ -35,20 +37,25 @@ class Checkout extends Component {
     const [subtotal, discount, total] = this.calculateTotal();
 
     return (
-      <div className="w-100">
-        <h1 className="f5 f4-ns fw6 tc black-70 measure center">Checkout</h1>
-        <h2 className="f6 black-70 fw2 tc ttu tracked center">Please confirm your purchase before proceeding </h2>
+      <div className="w-100 bg-white pa3">
+        <h1 className="f4 f2-ns fw6 tc black-70 measure center">Checkout</h1>
+        <h2 className="f4 black-70 fw2 tc ttu tracked center">Please confirm your purchase before proceeding </h2>
         <CheckoutList developersInCart={this.props.cart.developers}/>
 
-        {/* total */}
-        <p className="f6 black-70 fw2 tc ttu tracked center">Subtotal: {subtotal}</p>
-        <p className="f6 black-70 fw2 tc ttu tracked center">Discount: {discount}</p>
-        <hr className="w4" />
-        <p className="f6 black-70 fw2 tc ttu tracked center">Total: {total}</p>
-        <CouponForm />
+        <div className="display-total pl0 mt0 measure center tc bg-white w-100 h4">
+          <CouponForm/>
+          {/* total */}
+          <div className="fl w-100 w-50-l">
+            <p className="f6 black-70 fw2 tc ttu tracked center">Subtotal: {subtotal}</p>
+            <p className="f6 black-70 fw2 tc ttu tracked center">Discount: {discount}</p>
+            <hr className="w4" />
+            <p className="f6 black-70 fw2 tc ttu tracked center">Total: {total}</p>
+          </div>
+        </div>
+
         {/* next page */}
-        <div className="measure center">
-          <Link to="/confirmation" className="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba border-box fr">
+        <div className="measure center db tc w-100">
+          <Link to="/confirmation" onClick={() => this.cleanCookies()} className="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center mv3 pa3 ba border-box db center">
             <span className="pr1">Complete Checkout</span>
           </Link>
         </div>
