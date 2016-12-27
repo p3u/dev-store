@@ -59,7 +59,6 @@ class Catalog extends Component {
       loading = true;
     }
 
-    debugger;
     return (
       <div className="center">
         <section className="cf w-100 pa2-ns tc">

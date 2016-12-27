@@ -14,12 +14,24 @@ function cleanDevelopersData(response, url) {
     let parsedURL = url.split("/");
     parsedURL.pop();
     const orgName = parsedURL.pop()
-    return [{name: 'Sorry!', bio: response.errors[0].message, nFollowers:0, nStars:0, nRepos:0, wage:0, avatarUrl: 'http://developers.google.com/maps/documentation/static-maps/images/error-image-generic.png', id: 'error', organizations: [{login: orgName}], repos: [], languages: []}]
+    return [{name: 'Sorry!', bio: response.errors[0].message, nFollowers:0,
+             nStars:0, nRepos:0, wage:0, avatarUrl: 'http://developers.google.com/maps/documentation/static-maps/images/error-image-generic.png',
+             id: 'warning-message', organizations: [{login: orgName}],
+             repos: [], languages: []}]
   }
 
   // When fetching developers from an organization
   if ('organization' in response.data) {
     developers = response.data.organization.members.edges;
+
+    // This is a quick hack because I won't have time to deliever a proper solution!
+    if (developers.length === 0) {
+      return [{name: 'Sorry!', bio: 'This organization has no members',
+               nFollowers:0, nStars:0, nRepos:0, wage:0, id: 'warning-message',
+               avatarUrl: 'http://developers.google.com/maps/documentation/static-maps/images/error-image-generic.png',
+               organizations: [{login: response.data.organization.login}],
+               repos: [], languages: []}]
+    }
   }
 
   // When fetching a single developer
