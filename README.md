@@ -46,14 +46,14 @@
 * As classes do Tachyons ficaram muito bagunçadas. Deveria ter lido mais sobre a biblioteca antes de começar a usar
 * Os feedbacks de interação poderiam ser melhores. Não usei nenhum Ajax spinner, em algumas partes a resposta para o usuário é fraca
 * Quando percebi que o tempo estava acabando, acabei fazendo algumas gambiarras como:
-1. A parte de design ficou bem fraca. Acho que o UX está ok, porém não gastei tempo pensando em um conceito para o site, schema de cores, fontes, icones e etc...
-2. Retornar um card ao invés de uma mensagem de erro quando uma empresa que não existe é procurada
-3. Nos reducers, fiquei retornando cada pedaço do estado ao invés de usar o spread operator. Deveria ter limpado isso desde o início
-4. Usar hashHistory em vez de tratar corretamente no servidor
-5. O layout dá página de checkout está horrível (e com gambiarras, não parei para pensar no wireframe e sai tacando componentes)
+  * A parte de design ficou bem fraca. Acho que o UX está ok, porém não gastei tempo pensando em um conceito para o site, schema de cores, fontes, icones e etc...
+  * Retornar um card ao invés de uma mensagem de erro quando uma empresa que não existe é procurada
+  * Nos reducers, fiquei retornando cada pedaço do estado ao invés de usar o spread operator. Deveria ter limpado isso desde o início
+  * Usar hashHistory em vez de tratar corretamente no servidor
+  * O layout dá página de checkout está horrível (e com gambiarras, não parei para pensar no wireframe e sai tacando componentes)
 * Repetição de código em alguns lugares. Alguns exemplos:
-1. Os componentes terminados em Panel poderiam ser abstraidos em um componente genérico
-2. As funções da API poderiam ser abstraidas em uma função genérica, dando mais estrutura e garantindo padrão nas respostas do servidor
+  * Os componentes terminados em Panel poderiam ser abstraidos em um componente genérico
+  * As funções da API poderiam ser abstraidas em uma função genérica, dando mais estrutura e garantindo padrão nas respostas do servidor
 
 # Ideias que tive mas não consegui criar tempo para implementar
 * Corrigir todos os pontos fracos citados
