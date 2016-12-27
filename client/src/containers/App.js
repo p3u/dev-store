@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import NavBar from './NavBar';
 import '../style/App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchCart } from '../actions/index';
+import NavBar from '../components/NavBar';
 import axios from 'axios';
 import Cookies from 'cookies-js';
-
 
 class App extends Component {
 

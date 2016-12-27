@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleDeveloper } from '../actions/index';
-import LanguagesPanel from './LanguagesPanel';
-import ReposPanel from './ReposPanel';
-import OrganizationsPanel from './OrganizationsPanel';
-import StatsPanel from './StatsPanel';
-import AddCartButton from '../containers/AddCartButton';
-import ContactInfo from './ContactInfo';
-import ProfilePicturePanel from './ProfilePicturePanel';
+import LanguagesPanel from '../components/LanguagesPanel';
+import ReposPanel from '../components/ReposPanel';
+import OrganizationsPanel from '../components/OrganizationsPanel';
+import StatsPanel from '../components/StatsPanel';
+import ContactInfo from '../components/ContactInfo';
+import ProfilePicturePanel from '../components/ProfilePicturePanel';
+import AddCartButton from './AddCartButton';
+
 
 class Profile extends Component {
   constructor(props) {

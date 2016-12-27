@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from './components/App';
+import App from './containers/App';
 import CatalogBrowser from './components/CatalogBrowser';
 import Checkout from './containers/Checkout';
-import Profile from './components/Profile';
+import Profile from './containers/Profile';
 import PurchaseConfirmation from './components/PurchaseConfirmation';
 
 export default (

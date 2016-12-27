@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import CheckoutList from './CheckoutList'
 import { connect } from 'react-redux';
-import CouponForm from './CouponForm';
 import { Link } from 'react-router';
+import CheckoutList from './CheckoutList'
+import CouponForm from './CouponForm';
+
 
 class Checkout extends Component {
 

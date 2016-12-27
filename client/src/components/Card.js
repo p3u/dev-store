@@ -2,6 +2,19 @@ import React from 'react';
 import '../style/Card.css';
 import { Link } from 'react-router';
 
+function renderShortDescription(bio, languages) {
+  // If dev doesn't have a description, we will just render the languages he knows.
+  if (bio) return bio;
+  let shortDescription = '';
+  if (languages.length > 0) {
+    shortDescription = languages.reduce((text, languages) => {
+      return text + `${languages.name}, `
+    }, 'Programs in ');
+  }
+
+  return shortDescription.slice(0, -2)
+}
+
 export default function Card({devInfo}) {
   return (
     <Link to={`/profile/${devInfo.id}`} className="card-link gray">
@@ -31,10 +44,11 @@ export default function Card({devInfo}) {
             <p className="f6 gray mv1">{devInfo.organization}</p>
 
             <hr className="mw3 bb bw1 b--black-10" />
-
+            <div className="overflow-y-auto h4">
             <p className="lh-copy measure center f6 black-70">
-            {devInfo.bio}
+              {renderShortDescription(devInfo.bio, devInfo.languages)}
             </p>
+            </div>
           </div>
           <p className="mb5 green dev-wage">R$ {devInfo.wage}/h</p>
         </div>

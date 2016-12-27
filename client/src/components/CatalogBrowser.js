@@ -1,5 +1,5 @@
 import React from 'react';
-import Catalog from './Catalog';
+import Catalog from '../containers/Catalog';
 import SearchBar from '../containers/SearchBar';
 
 
