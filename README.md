@@ -4,7 +4,7 @@
 ## Priorização de Featues
 ### Implementadas  
 **Criar as páginas: catálogo de desenvolvedores, pagina do desenvolvedor e carrinho**  
-*Basico para o site funcionar*  
+*Básico para o site funcionar*  
 
 **Criar uma paginação para o catálogo de desenvolvedores.**  
 *Se não fizesse, site ficaria lento e esgotaria o limite do API do GitHub*  
@@ -19,7 +19,7 @@
 *Mesma razão acima, porém percebi que: Utilizar o número de estrelas é complicado. Para calcular o total de estrelas, precisamos dar fetch em todos os repos do usuário, o que é muito custoso. Acabei usando, mas sabendo que não era a solução ideal*  
 
 **Adicionar um botão de "Finalizar compra" que leva o usuário a uma página de pedido confirmado.**  
-*Também é facil de implementar. Se tivesse mais tempo, melhoraria essa parte. Atualmente a página não confirma os dados da compra com o Servidor. Para isso, teria que passar a função de calcular preço do Desenvolvedor para o Servidor'*  
+*Também é fácil de implementar. Se tivesse mais tempo, melhoraria essa parte. Atualmente a página não confirma os dados da compra com o Servidor. Para isso, teria que passar a função de calcular preço do Desenvolvedor para o Servidor'*  
 
 **Permitir a adição de um cupom de desconto que altera o preço total da compra. Utilize o código "SHIPIT".**  
 *Esse de fato era fácil*  
@@ -27,17 +27,17 @@
 
 ### Não Implementadas  
 **Criar uma ordenação para o catálogo de desenvolvedores.**  
-*Percebi que ia ser chato de implementar por causa da paginação. Teria que ler todos os desenvolvedores da org para pode ordenar por exemplo por preço. É uma boa feature, mas deixaria pra depois*  
+*Percebi que ia ser chato de implementar por causa da paginação. Teria que ler todos os desenvolvedores da organização para pode ordenar por exemplo por preço. É uma boa feature, mas deixaria pra depois*  
 
-**Transforme a aplicação em um Progressive Web App. (Também seria legal ter o site em Progressive Web App... mas não sei estimar quanto tempo demora, prefiro deixar para depois)**  
+**Transforme a aplicação em um Progressive Web App.**  
 *Como nunca fiz Progressive Web Apps, achei que pudesse tomar muito tempo.*  
 
 **Faça sua API ser GraphQL**  
-*Nem daria tanto trabalho, mas considerando que a API é basica (poucas URIs) acho besteira implementar. Aumentaria a complexidade do projeto com mais uma tecnologia, e sinceramente não vejo tanto valor para esse projeto. Pode ser feito depois de qualquer maneira*  
+*Nem daria tanto trabalho, mas considerando que a API é básica (poucas URIs) acho besteira implementar. Aumentaria a complexidade do projeto com mais uma tecnologia, e sinceramente não vejo tanto valor para esse projeto. Pode ser feito depois de qualquer maneira*  
 
 ## Pontos fortes
 * Cache de requests tanto no cliente quanto no servidor (usando Redis)
-* Ao pesquisar uma organização, primeiro o servidor faz um request de serach para o Github para buscar a organização com o nome mais parecido
+* Ao pesquisar uma organização, primeiro o servidor faz um request de search para o Github para buscar a organização com o nome mais parecido
 * Página do Catalogo e Perfil estão bem responsivas. A do Perfil especialmente deu muito trabalho
 * As páginas do perfil e do checkout podem ser acessadas diretamente, e o webapp fará os requests necessários
 * No geral, a forma como as estruturas foram modeladas ficou boa. Não me deu trabalho de interagir com os dados durante o desenvolvimento
