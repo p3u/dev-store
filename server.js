@@ -50,6 +50,12 @@ const cacheOnClient = function(req, res, next) {
   next();
 }
 
+
+// Serving static files
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 //Applying middlewares
 app.use(allowCrossDomain);
 app.use(cacheOnClient);
