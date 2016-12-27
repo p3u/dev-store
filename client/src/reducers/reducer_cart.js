@@ -1,14 +1,12 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, FETCH_CART, UPDATE_DEV_HOURS, APPLY_COUPON } from '../actions/index';
+import { ADD_TO_CART, REMOVE_FROM_CART, FETCH_CART, UPDATE_DEV_HOURS, APPLY_COUPON, CLEAR_CART_ON_CLIENT } from '../actions/index';
 
 export default function(state = {developers: {}, discount: 0, code: null, loading: true}, action) {
     if(action.payload && action.payload.response) {
       if( action.payload.response.status === 500 ||  action.payload.response.status === 403) {
-        console.log(action.payload.response)
         return state;
       }
 
       if( !action.payload.data.success ) {
-        console.log(action.payload.data.error)
         return state;
       }
     }
@@ -60,6 +58,9 @@ export default function(state = {developers: {}, discount: 0, code: null, loadin
               discount: state.discount,
               code: null,
               loading: false };
+
+    case CLEAR_CART_ON_CLIENT:
+      return { developers: {}, discount: 0, code: null, loading: false };
 
     case APPLY_COUPON:
       const code = action.payload.data.code

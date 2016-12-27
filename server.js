@@ -64,6 +64,8 @@ app.use(cacheOnClient);
 
 
 ///////////////////////////////////// API /////////////////////////////////////
+// TODO: All these requests could have been abstrected since they return
+// information in the same manner
 
 // Fetches a single dev
 app.get('/api/dev/:gitlogin', cache.route(), function(req, res) {

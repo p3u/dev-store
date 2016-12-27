@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import CheckoutList from './CheckoutList'
 import CouponForm from './CouponForm';
 import Cookies from 'cookies-js';
+import axios from 'axios';
+import { clearCartOnClient } from '../actions/index';
 
 class Checkout extends Component {
   cleanCookies() {
     Cookies.expire('userid')
+    const BASE_URL = `http://${window.location.hostname}/api:5000`;
+    axios.post(`${BASE_URL}/new/user`);
+    this.props.clearCartOnClient();
+
   }
   calculateTotal() {
     const developersInCart = this.props.cart.developers;
@@ -65,8 +72,12 @@ class Checkout extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ clearCartOnClient }, dispatch)
+}
+
 function mapStateToProps( { cart, developers } ) {
   return { cart, developers };
 }
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

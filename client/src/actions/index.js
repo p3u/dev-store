@@ -8,6 +8,7 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const FETCH_CART = 'FETCH_CART';
 export const UPDATE_DEV_HOURS = 'UPDATE_DEV_HOURS';
 export const APPLY_COUPON = 'APPLY_COUPON';
+export const CLEAR_CART_ON_CLIENT = 'CLEAR_CART_ON_CLIENT';
 
 const BASE_URL  = `http://${window.location.hostname}:5000/api`
 
@@ -56,6 +57,13 @@ export function fetchCart(userid) {
   return {
     type: FETCH_CART,
     payload: request
+  }
+}
+
+export function clearCartOnClient() {
+  return {
+    type: CLEAR_CART_ON_CLIENT,
+    payload: true
   }
 }
 

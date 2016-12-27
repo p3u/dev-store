@@ -5,7 +5,6 @@ import _ from 'lodash';
 // If I need one RepoTile I can simply send an array with one repo to this component.
 
 function renderRepoTile(repo, idx) {
-  console.log(repo)
   return (
     <div key={idx} className="repo-card overflow-y-auto bg-white fl w-100 h-100 w-50-m w-third-l pa2 ba b--dotted b--light-silver">
       <h4 className="dib hyphenate mv3">{repo.name}</h4>
@@ -19,7 +18,6 @@ function renderRepoTile(repo, idx) {
 }
 
 function renderRepoRow(repos, key) {
-  console.log(repos)
    return (
         <div key={key} className="repo-row h5 cf">
           { repos.map( (repo, idx) => renderRepoTile(repo, idx) )  }

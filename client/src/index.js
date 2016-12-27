@@ -15,7 +15,7 @@ import './style/vtex-style.css';
 
 // I didn't want to use hash history, but I couldn't configure the server properly
 let history = createHashHistory({
-  basename: 'http:localhost:3000',
+  basename: 'http://${window.location.hostname}',
   hashType: 'slash',
 
   getUserConfirmation: (message, callback) => callback(window.confirm(message))

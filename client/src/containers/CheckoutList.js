@@ -42,7 +42,7 @@ class CheckoutList extends Component {
       }
     });
 
-    if (Object.keys(renderedDevs).length === 0) return (<p> 'No devs were added to the list' </p>)
+    if (Object.keys(renderedDevs).length === 0) return (<p className="tc"> 'No devs were added to the list' </p>)
 
     return (
       <ul className="list pl0 mt0 measure center">
