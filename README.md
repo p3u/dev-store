@@ -45,6 +45,7 @@
 ## Pontos fracos
 * As classes do Tachyons ficaram muito bagunçadas. Deveria ter lido mais sobre a biblioteca antes de começar a usar
 * Os feedbacks de interação poderiam ser melhores. Não usei nenhum Ajax spinner, em algumas partes a resposta para o usuário é fraca
+* Não revi o código quando terminei. O plano era no inal eu rever e dar uma limpada, mas... não consegui. Pelo menos vocês podem avaliar meu estilo com mais transparência
 * Quando percebi que o tempo estava acabando, acabei fazendo algumas gambiarras como:
   * A parte de design ficou bem fraca. Acho que o UX está ok, porém não gastei tempo pensando em um conceito para o site, schema de cores, fontes, icones e etc...
   * Retornar um card ao invés de uma mensagem de erro quando uma empresa que não existe é procurada
