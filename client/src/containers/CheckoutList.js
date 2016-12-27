@@ -42,8 +42,10 @@ class CheckoutList extends Component {
       }
     });
 
+    // Testing if cart is empty
     if (Object.keys(renderedDevs).length === 0) return (<p className="tc"> 'No devs were added to the list' </p>)
 
+    // Rendereing each cart item
     return (
       <ul className="list pl0 mt0 measure center">
         {Object.keys(renderedDevs).map(id => <CheckoutItem key={id} itemInfo={renderedDevs[id]}/>)}

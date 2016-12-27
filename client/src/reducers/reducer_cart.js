@@ -1,6 +1,8 @@
 import { ADD_TO_CART, REMOVE_FROM_CART, FETCH_CART, UPDATE_DEV_HOURS, APPLY_COUPON, CLEAR_CART_ON_CLIENT } from '../actions/index';
 
 export default function(state = {developers: {}, discount: 0, code: null, loading: true}, action) {
+
+    // If errors coming in, don't change state (Not the best behaviour)
     if(action.payload && action.payload.response) {
       if( action.payload.response.status === 500 ||  action.payload.response.status === 403) {
         return state;
@@ -11,9 +13,13 @@ export default function(state = {developers: {}, discount: 0, code: null, loadin
       }
     }
 
+    // Declaring variables used in multiple case in the switch statement
     let devId = undefined;
     let discount = undefined;
+
     switch (action.type) {
+
+    // Just grap the added developer and put him in the car
     case ADD_TO_CART :
       const developer = action.payload.data.developer;
       devId = Object.keys(developer)[0];
@@ -25,6 +31,7 @@ export default function(state = {developers: {}, discount: 0, code: null, loadin
                code: null,
                loading: false };
 
+    // Just delete the developer key from car
     case REMOVE_FROM_CART:
       devId = action.payload.data.devId;
       let newDevelopers = Object.assign({}, state.developers);
@@ -34,6 +41,7 @@ export default function(state = {developers: {}, discount: 0, code: null, loadin
                code: null,
                loading: false };
 
+    // Grab car info, separate discount key from developers key and return
     case FETCH_CART:
       discount = action.payload.data.cart.discount;
       let developers = action.payload.data.cart;
@@ -49,6 +57,7 @@ export default function(state = {developers: {}, discount: 0, code: null, loadin
                code: null,
                loading: false };
 
+
     case UPDATE_DEV_HOURS:
       const hours = action.payload.data.hours;
       devId = action.payload.data.devId;
@@ -59,6 +68,7 @@ export default function(state = {developers: {}, discount: 0, code: null, loadin
               code: null,
               loading: false };
 
+    // Used when cookie is reseted at checkout
     case CLEAR_CART_ON_CLIENT:
       return { developers: {}, discount: 0, code: null, loading: false };
 

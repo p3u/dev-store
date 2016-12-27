@@ -16,7 +16,7 @@ class Catalog extends Component {
 
   filterByOrg = function(devs, filteredOrg) {
     return devs.filter( (dev) => {
-      // Lower case without spaces
+      // Compare lower case without spaces
       filteredOrg = filteredOrg ? filteredOrg.toLowerCase().replace(/\s/g,'') : undefined
       const orgLogins = dev.organizations.map((org) => {
         return org.login.toLowerCase().replace(/\s/g,'');
@@ -62,7 +62,7 @@ class Catalog extends Component {
     return (
       <div className="center">
         <section className="cf w-100 pa2-ns tc">
-          { loading ? 'Loading...' : filteredDevelopers.map(dev => <Card key={dev.id} devInfo={dev}/>)}
+          { loading ? 'Loading...' : filteredDevelopers.map(dev => <Card key={dev.id} devInfo={dev} />)}
         </section>
         {this.renderLoadMoreButton()}
       </div>

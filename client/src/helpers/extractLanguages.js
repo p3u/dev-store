@@ -1,4 +1,5 @@
 
+// Just looping over repos, extracting langagues without duplicating them :)
 export default function extractLanguages(repoEdges) {
   const languagesName = [];
   const languages = [];

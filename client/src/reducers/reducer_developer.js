@@ -4,6 +4,7 @@ import extractLanguages from '../helpers/extractLanguages';
 import extractRepos from '../helpers/extractRepos';
 
 
+// This function works both when fetching a singleDev or fetching devs from an org.
 function cleanDevelopersData(response, url) {
   let developers = [];
 
@@ -39,6 +40,7 @@ function cleanDevelopersData(response, url) {
     developers = [ {node: response.data.user } ];
   }
 
+  // Just map over devs and extract/format the data
   return developers.map( (devData) => {
     const dev = devData.node;
 
@@ -74,10 +76,10 @@ export default function(state = [], action) {
     switch (action.type) {
     case FETCH_DEVELOPERS:
       const URL = action.payload.request.responseURL;
-      return state.concat(cleanDevelopersData(action.payload.data, URL));
+      return state.concat( cleanDevelopersData(action.payload.data, URL) );
 
     case FETCH_SINGLE_DEVELOPER:
-      return state.concat(cleanDevelopersData(action.payload.data));
+      return state.concat( cleanDevelopersData(action.payload.data) );
 
     default:
       return state;

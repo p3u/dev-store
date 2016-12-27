@@ -8,8 +8,7 @@ export default function ProfilePicturePanel( {avatarUrl} ){
      </div>
      <div className="dt w-100">
       <div className="w-100 h5 ba bg-white b--dotted b--light-silver dtc v-mid">
-        <img className="profile-img br3" src={avatarUrl}
-                                           alt="Avatar" />
+        <img className="profile-img br3" src={avatarUrl} alt="Avatar" />
       </div>
     </div>
   </div>

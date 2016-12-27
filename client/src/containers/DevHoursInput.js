@@ -21,7 +21,7 @@ class DevHoursInput extends Component {
   )
 
 
-  // Controlling my form and optimisticly updating it.
+  // Controlling my form and updating it.
   onInputChange(e) {
     const hours = e.target.value;
     this.setState( { hours } );
@@ -32,10 +32,15 @@ class DevHoursInput extends Component {
   }
 
   render() {
+    // A little color feedback to know that hours were updated
     const isSynchedWithServer = this.state.hours === this.props.hours;
     const color = isSynchedWithServer ? 'black' : 'light-blue'
+
     return (
-      <input onChange={ (e) => this.onInputChange(e) } className={"f6 w2-5 " + color} type="number" name="quantity" min="1" max="99" value={this.state.hours}/>
+      <input onChange={ (e) => this.onInputChange(e) }
+             className={"f6 w2-5 " + color}
+             type="number" name="quantity" min="1" max="99"
+             value={this.state.hours}/>
     );
   }
 }

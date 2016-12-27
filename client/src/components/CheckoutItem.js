@@ -23,9 +23,12 @@ export default function checkOutItem(props){
           <DevHoursInput devId={props.itemInfo.id} />
         </div>
         <div className="pl3 w4">
-          <span className="f6 db black-70">R${props.itemInfo.wage} <span className="f6 db black-70 fr-ns ml1">hour</span></span>
-          <span className="f6 db black-70">R${props.itemInfo.hours * props.itemInfo.wage} <span className="f6 db black-70 fr-ns ml1">total</span></span>
-
+          <span className="f6 db black-70">R${props.itemInfo.wage}
+            <span className="f6 db black-70 fr-ns ml1">hour</span>
+          </span>
+          <span className="f6 db black-70">R${props.itemInfo.hours * props.itemInfo.wage}
+            <span className="f6 db black-70 fr-ns ml1">total</span>
+          </span>
         </div>
         <div className="ph2 grow grow:hover">
           <AddCartButton className="w1" devId={props.itemInfo.id} removeIcon={true} />

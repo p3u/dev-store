@@ -52,8 +52,10 @@ class Profile extends Component {
 
     return (
       <section className="cf w-100 pa2-ns">
+
         <AddCartButton devId={dev.id} />
 
+        {/* First row */}
         <div className="basic-info cf ph2-ns cb">
           <div className="fl w-100 w-40-m w-25-l pa2">
             <ProfilePicturePanel avatarUrl={dev.avatarUrl}/>
@@ -68,6 +70,7 @@ class Profile extends Component {
         </div>
 
 
+        {/* Second Row */}
         <div className="programming-info cf ph2-ns ">
           <div className="dev-skills fl w-100 w-25-l pa2">
             <div className="stats-panel w-100 pr2-m w-30-m fl-m mb2">
@@ -83,6 +86,7 @@ class Profile extends Component {
             <ReposPanel repos={dev.repos.slice(0,6)} tilesPerRows={3} />
           </div>
         </div>
+
       </section>
     );
   }
@@ -92,4 +96,5 @@ function mapStateToProps( {developers} ) {
   return { developers };
 }
 
+// Sugar syntax instead of using mapDispatchToProps
 export default connect(mapStateToProps, { fetchSingleDeveloper })(Profile);

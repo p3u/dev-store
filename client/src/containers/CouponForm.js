@@ -54,9 +54,13 @@ class CouponForm extends Component {
         <form onSubmit={(e) => this.onFormSubmit(e)} className="w5 center br2-ns">
           <fieldset className="cf bn ma0 pa0 w5">
             <div className="cf">
-              <label htmlFor="coupon-input" className="f6 db tl ttu pt3 pb1 mb2">Coupon Code <span className="normal black-60">(optional)</span></label>
+              <label htmlFor="coupon-input" className="f6 db tl ttu pt3 pb1 mb2">
+                Coupon Code
+                <span className="normal black-60">(optional)</span>
+              </label>
               <input onChange={(e) => this.onInputChange(e)} value={this.state.code}
-                     className="f6 f5-l input-reset ba b--black-10 fl black-80 pa3 w-100 w-60-m w-60-l br2-ns br--left-ns" type="text" name="coupon-input" />
+                     className="f6 f5-l input-reset ba b--black-10 fl black-80 pa3 w-100 w-60-m w-60-l br2-ns br--left-ns"
+                     type="text" name="coupon-input" />
               <input type="submit" value="Apply"
                      className="f6 button-reset fl pv3 tc ba b--black-10 blue-bg bg-animate dim white pointer w-100 w-25-m w-20-l br2-ns br--right-ns"/>
             </div>
