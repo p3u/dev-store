@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
 
-import { Router }  from 'react-router';
+import { applyRouterMiddleware, Router }  from 'react-router';
+import { useScroll } from 'react-router-scroll';
 import { createHashHistory } from 'history';
 
 import reducers from './reducers';
@@ -25,6 +26,7 @@ const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-    <Router history={history} routes={routes} />
+    <Router history={history} routes={routes}
+            render={applyRouterMiddleware(useScroll())}/>
   </Provider>
   , document.getElementById('root'));
