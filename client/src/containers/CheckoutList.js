@@ -10,6 +10,10 @@ class CheckoutList extends Component {
     // For each fetched developers (whole app), check if this developer is in
     // the cart.
     // O(n) vs O(kn) if I did the other way around.
+
+    // Post note: I realized this makes no sense, since the 'in' operation will
+    // take linear time. So obviously, it doens't matter which way I search.
+
     // Could be reduced roughly to O(1) if I used a object to store fetchedDevelopers
     // The JSON parse stringfy was the way I found to do a deep copy
     let developersInCart = JSON.parse(JSON.stringify(this.props.developersInCart))

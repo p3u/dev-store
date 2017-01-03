@@ -77,7 +77,7 @@ app.get('/api/dev/:gitlogin', cache.route(), function(req, res) {
     function(error) {
       res.status(error.response.status).send(error.response.data.message);
     }
-  ).catch(e => res.status(500).send("Couldn't fetch data"));
+  ).catch(e => res.status(500).json({error: e}));
 });
 
 // Fetches 8 devs from an organizaiton
@@ -91,7 +91,7 @@ app.get('/api/devs/:organization/:endcursor', cache.route(), function(req, res) 
     (error) => {
       res.status(error.response.status).send(error.response.data.message);
     }
-  ).catch(e => res.status(500).send("Couldn't fetch data"));
+  ).catch(e => res.status(500).json({error: e}));
 });
 
 

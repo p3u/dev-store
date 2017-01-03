@@ -30,7 +30,7 @@ function query(queryName, term, confirmationSearch=false, endCursor) {
         // Do the main query...
         .then( (res) => {
           let newTerm = res.data.total_count > 0 ? res.data.items[0].login : term;
-          return axios.post(url, queryName(newTerm, endCursor), config);;
+          return axios.post(url, queryName(newTerm, endCursor), config);
         });
     });
 }

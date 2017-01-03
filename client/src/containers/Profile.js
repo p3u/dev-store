@@ -23,7 +23,7 @@ class Profile extends Component {
   componentWillMount() {
     // This perfomance could be improved if I used a hash (object) instead
     // of looping over the array of devs. But I think it's perfectionism
-    // since it's unlikely that this array will grow so much that a O(n)
+    // since it's unlikely that this array will grow so much that a O(kn)
     // operation becomes slow.
 
     // A little convoluted...
