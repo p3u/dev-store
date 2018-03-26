@@ -1,10 +1,10 @@
 export const developerInfoQuery = `
 {
   name
-  avatarURL
+  avatarUrl
   login
   email
-  websiteURL
+  websiteUrl
   bio
   location
   followers {
@@ -13,7 +13,7 @@ export const developerInfoQuery = `
   organizations (first: 10) {
     edges {
       node {
-        avatarURL
+        avatarUrl
         login
         name
       }
