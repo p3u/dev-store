@@ -21,6 +21,7 @@
     "uuid": "^3.0.1"
   },
   "scripts": {
-    "start": "babel-node server.js"
+    "start": "babel-node server.js",
+    "server": "babel-node server.js"
   }
 }
