@@ -6,7 +6,7 @@ export default function organizationsDevsQuery(organization, endCursor) {
   `{"query": "query {
       organization(login: \\"${organization}\\") {
         login
-        members(first: 8${paginationArgument}) {
+        membersWithRole(first: 8${paginationArgument}) {
           totalCount
           pageInfo {
             hasNextPage
